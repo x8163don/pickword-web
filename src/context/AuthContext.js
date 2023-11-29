@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {getMyAccount, login} from '../api/account/Account';
+import {getMyAccount, login} from '../api/account';
 
 export const AuthContext = React.createContext({
     isLoggingIn: false,

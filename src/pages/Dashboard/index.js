@@ -1,4 +1,6 @@
 
 export default function Dashboard() {
-    return <div>Dashboard</div>
+    return <div className="container">
+            <h1>Dashboard</h1>
+    </div>
 }
