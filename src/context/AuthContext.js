@@ -33,17 +33,16 @@ export const AuthContextProvider = (props) => {
         }
     });
 
-    const loginHandler = (thirtyPartyToken, loginType) => {
+    const loginHandler = async (thirtyPartyToken, loginType) => {
         setThirdPartyToken(thirtyPartyToken);
         sessionStorage.setItem("thirdPartyToken", thirtyPartyToken);
-        login(thirtyPartyToken, loginType).then((res) => {
-            if (res.token) {
-                setIsLoggedIn(true);
-                setToken(res.token);
-                sessionStorage.setItem("token", res.token);
-            }
-            updateAccountInfoHandler()
-        });
+        const result = await login(thirtyPartyToken, loginType)
+        if (result.token) {
+            setIsLoggedIn(true);
+            setToken(result.token);
+            sessionStorage.setItem("token", result.token);
+        }
+        updateAccountInfoHandler()
     };
 
     const logoutHandler = () => {

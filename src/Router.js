@@ -1,8 +1,10 @@
 import {createBrowserRouter} from "react-router-dom";
 import SingleColumn from "./components/layout/SingleColumn";
+import SideMenu from "./components/layout/SideMenu";
 import Home from "./pages/Home/index";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
 
 export const router = createBrowserRouter([
     {
@@ -23,4 +25,11 @@ export const router = createBrowserRouter([
         path: '/register',
         element: <Register/>
     },
+    {
+        path: '/dashboard',
+        element: <SideMenu />,
+        children: [
+            {path: '', element: <Dashboard />}
+        ]
+    }
 ])

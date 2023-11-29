@@ -1,23 +1,33 @@
 import {Card, CardHeader, CardBody, Button, Typography} from "@material-tailwind/react";
-import {useEffect} from "react";
+import {useContext, useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {AuthContext} from "../../context/AuthContext";
 
 function Login() {
 
-    const handleCallbackResponse = (response) => {
-        console.log(response);
+    const navigate = useNavigate();
+    const authCtx = useContext(AuthContext)
+
+    const handleCallbackResponse = async (response) => {
+        try {
+            await authCtx.onLogin(response.credential, "google")
+            navigate("/dashboard")
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     useEffect(() => {
         // eslint-disable-next-line no-undef
         google.accounts.id.initialize({
-            client_id: "331449397649-ursnuq6m5jbv7qq5ha6bvuuj93fgrds8.apps.googleusercontent.com",
+            client_id: process.env.REACT_APP_OAUTH2_CLIENT_ID,
             callback: handleCallbackResponse,
         })
 
         // eslint-disable-next-line no-undef
         google.accounts.id.renderButton(
             document.getElementById("g-login"),
-            {width: 278, theme: "outline", size: "large", type: "standard", text: "使用 Google 帳戶登入"},
+            {width: 278, theme: "outline", size: "large", type: "standard", text: "signin_with"},
         )
     }, [])
 

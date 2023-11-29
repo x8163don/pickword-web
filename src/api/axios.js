@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const initialize = () => {
-    axios.defaults.baseURL = process.env.API_URL
+    axios.defaults.baseURL = process.env.REACT_APP_BASE_URL
 }
