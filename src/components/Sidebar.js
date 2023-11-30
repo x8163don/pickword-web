@@ -4,8 +4,6 @@ import {
     List,
     ListItem,
     ListItemPrefix,
-    ListItemSuffix,
-    Chip,
 } from "@material-tailwind/react";
 import {
     HomeIcon,
@@ -20,22 +18,25 @@ export default function Sidebar() {
     const navigate = useNavigate();
 
     const items = [
-        {text: "主頁", icon: <HomeIcon className="h-5 w-5"/>, page: "/dashboard"},
-        {text: "字卡", icon: <Square2StackIcon className="h-5 w-5"/>, page: "/word"},
-        {text: "複習", icon: <RocketLaunchIcon className="h-5 w-5"/>, page: "/review"},
-        {text: "帳戶", icon: <UserCircleIcon className="h-5 w-5"/>, page: "/account"},
+        {id: 1, text: "主頁", icon: <HomeIcon className="h-5 w-5"/>, page: "/dashboard"},
+        {id: 2, text: "字卡", icon: <Square2StackIcon className="h-5 w-5"/>, page: "/word"},
+        {id: 3, text: "複習", icon: <RocketLaunchIcon className="h-5 w-5"/>, page: "/review"},
+        {id: 4, text: "帳戶", icon: <UserCircleIcon className="h-5 w-5"/>, page: "/account"},
     ]
 
-    return <Card className="h-[calc(100vh)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
+    return <Card className="h-[calc(100vh)] w-full max-w-[18rem] p-4 shadow-xl shadow-blue-gray-900/5">
         <div className="mb-2 p-4">
             <Typography variant="h5" color="blue-gray"> </Typography>
         </div>
         <List>
             {
                 items.map((item, index) => (
-                    <ListItem onClick={() => {
-                        navigate(item.page)
-                    }}>
+                    <ListItem
+                        key={item.id}
+                        onClick={() => {
+                            navigate(item.page)
+                        }}
+                    >
                         <ListItemPrefix>
                             {item.icon}
                         </ListItemPrefix>

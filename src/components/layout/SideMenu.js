@@ -4,7 +4,9 @@ import Sidebar from "../Sidebar";
 function SideMenu() {
     return <main className="flex">
         <Sidebar/>
-        <Outlet/>
+        <div className="flex flex-col justify-between flex-1">
+            <Outlet/>
+        </div>
     </main>
 }
 
