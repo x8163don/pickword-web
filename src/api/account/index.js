@@ -15,3 +15,11 @@ export const getMyAccount = async () => {
     });
     return response.data;
 };
+
+export const checkAuth = async () => {
+    const token = sessionStorage.getItem("token")
+    const response = await axios.get('/auth/check', {
+        headers: {Authorization: token},
+    })
+    return response.data
+}

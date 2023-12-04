@@ -1,16 +1,16 @@
 import {Card, CardHeader, CardBody, Button, Typography} from "@material-tailwind/react";
-import {useContext, useEffect, useState} from "react";
+import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import {AuthContext} from "../../context/AuthContext";
+import {fetchLogin} from "../../store/auth/action";
+import {useDispatch} from "react-redux";
 
 function Login() {
-
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const authCtx = useContext(AuthContext)
 
-    const handleCallbackResponse = async (response) => {
+    const handleCallbackResponse = async(response) => {
         try {
-            await authCtx.onLogin(response.credential, "google")
+            await dispatch(fetchLogin(response.credential))
             navigate("/dashboard")
         } catch (error) {
             console.log(error)
