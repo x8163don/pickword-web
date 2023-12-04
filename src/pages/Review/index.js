@@ -35,6 +35,7 @@ export default function Review() {
     }, [review])
 
     const answerQuestionHandler = async (answer) => {
+
         answerQuestion(review.id, answer)
 
         // next question
@@ -49,6 +50,7 @@ export default function Review() {
                 return {...prev, current_question_id: review.questions[curQuestionIdx + 1].id}
             })
         }
+
     }
 
     return <>

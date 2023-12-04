@@ -3,7 +3,7 @@ import {FireIcon} from "@heroicons/react/24/solid";
 import {useEffect, useState} from "react";
 
 export default function QuestionProgress({review}) {
-    console.log(review);
+
     const [showText, setShowText] = useState("")
     const [color, setColor] = useState("green")
     const [continuousCount, setContinuousCount] = useState(0)
@@ -26,9 +26,7 @@ export default function QuestionProgress({review}) {
             }
         }
 
-        setContinuousCount((prev => {
-            return continuousCountTmp
-        }))
+        setContinuousCount(continuousCountTmp)
 
         if (continuousCountTmp >= 1) {
             setShowText("")
@@ -44,7 +42,6 @@ export default function QuestionProgress({review}) {
             setShowText(`連續答對${continuousCount}題`)
             setColor("red")
         }
-
 
     }, [review])
     return <>
