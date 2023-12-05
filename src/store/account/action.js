@@ -5,17 +5,13 @@ export const fetchAccountDetail = () => {
     return async (dispatch) => {
         const resp = await getMyAccount()
 
-        if (resp.status !== 200) {
+        if (resp.ok) {
             throw new Error("Login failed")
         }
 
-        sessionStorage.setItem("token", resp.token)
+        const account = await resp.json()
 
-        dispatch(accountActions.login(resp.token))
-
-        const accountData = await getMyAccount()
-
-        dispatch(accountActions.updateAccountInfo(accountData))
+        dispatch(accountActions.replaceAccountDetail(account))
     }
 }
 

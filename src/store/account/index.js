@@ -2,10 +2,9 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const accountSlice = createSlice({
     name: "account",
-    initialState: {isExist: false, account: null},
+    initialState: {account: null},
     reducers: {
         replaceAccountDetail: (state, action) => {
-            state.isExist = !!action.payload
             state.account = action.payload;
         }
     }
