@@ -5,7 +5,7 @@ import Home from "./pages/Home/index";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
-import Review from "./pages/Review";
+import Review, {reviewLoader} from "./pages/Review";
 import Account, {accountLoader} from "./pages/Account";
 import Word from "./pages/Word";
 import {checkAuthTokenLoader} from "./utils/auth";
@@ -40,7 +40,7 @@ export const router = createBrowserRouter([
     {
         path: '/review',
         element: <SideMenu/>,
-        loader: checkAuthTokenLoader,
+        loader: serializeLoader(checkAuthTokenLoader, reviewLoader),
         children: [
             {path: '', element: <Review/>}
         ]

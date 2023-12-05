@@ -3,6 +3,8 @@ import {answerQuestion, createReview, getReview} from "../../api/review";
 import {Button, Typography} from "@material-tailwind/react";
 import {CheckCircleIcon} from "@heroicons/react/24/solid";
 import QuestionProgress from "./QuestionProgress";
+import {fetchLastDoingReview} from "../../store/review/action";
+import store from "../../store";
 
 export default function Review() {
 
@@ -106,5 +108,8 @@ export default function Review() {
             </>
         }
     </>
+}
 
+export const reviewLoader = () => {
+    store.dispatch(fetchLastDoingReview())
 }
