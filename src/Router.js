@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import Review from "./pages/Review";
 import Account from "./pages/Account";
 import Word from "./pages/Word";
+import {checkAuthTokenLoader} from "./utils/auth";
 
 export const router = createBrowserRouter([
     {
@@ -31,6 +32,7 @@ export const router = createBrowserRouter([
     {
         path: '/dashboard',
         element: <SideMenu/>,
+        loader: checkAuthTokenLoader,
         children: [
             {path: '', element: <Dashboard/>}
         ]
@@ -38,6 +40,7 @@ export const router = createBrowserRouter([
     {
         path: '/review',
         element: <SideMenu/>,
+        loader: checkAuthTokenLoader,
         children: [
             {path: '', element: <Review/>}
         ]
@@ -45,13 +48,15 @@ export const router = createBrowserRouter([
     {
         path: '/word',
         element: <SideMenu/>,
+        loader: checkAuthTokenLoader,
         children: [
             {path: '', element: <Word/>}
         ]
     },
     {
-        path: '/Account',
+        path: '/account',
         element: <SideMenu/>,
+        loader: checkAuthTokenLoader,
         children: [
             {path: '', element: <Account/>}
         ]
