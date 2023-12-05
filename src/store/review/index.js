@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit"
 
 const reviewSlice = createSlice({
     name: "review",
-    initialState: {},
+    initialState: {review: null},
     reducers: {
         replaceReview: (state, action) => {
             this.state.review = action.payload
