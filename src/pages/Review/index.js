@@ -1,26 +1,45 @@
 import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {useLoaderData} from 'react-router-dom';
 import {answerQuestion, createReview, getReview} from "../../api/review";
 import {Button, Typography} from "@material-tailwind/react";
 import {CheckCircleIcon} from "@heroicons/react/24/solid";
-import QuestionProgress from "./QuestionProgress";
-import {fetchLastDoingReview} from "../../store/review/action";
-import store from "../../store";
+import {useQuery, useMutation} from "@tanstack/react-query";
+import {queryClient} from "../../api";
+import {reviewActions} from "../../store/review";
 
 export default function Review() {
 
-    const [review, setReview] = useState(null)
+    const dispatch = useDispatch()
+    const reviewId = useLoaderData()
+
+    const review = useSelector((state) => state.review.review)
     const [question, setQuestion] = useState(null)
 
+    const {
+        data: reviewData,
+        isLoading: isReviewLoading,
+        isError: isReviewError,
+        error: reviewError
+    } = useQuery({
+        queryKey: ["review", reviewId],
+        queryFn: ({signal}) => getReview({reviewId, signal}),
+    })
+
+    const {
+        mutate: answerQuestionMutate,
+        isLoading: isAnswering,
+        isError: isAnsweringError,
+        error: answerError
+    } = useMutation({
+        mutationFn: answerQuestion,
+    })
+
     useEffect(() => {
-        (async () => {
-            const response = await createReview()
-            const reviewID = response.id
-            const newReview = await getReview(reviewID)
-            setReview((prev) => {
-                return newReview
-            })
-        })()
-    }, [])
+        if (reviewData && !review) {
+            dispatch(reviewActions.replaceReview(reviewData))
+        }
+    }, [reviewData])
 
     useEffect(() => {
         setQuestion((prev) => {
@@ -37,29 +56,21 @@ export default function Review() {
     }, [review])
 
     const answerQuestionHandler = async (answer) => {
-
-        answerQuestion(review.id, answer)
-
-        // next question
-        const curQuestionIdx = review.questions.findIndex((q) => q.id == question.id)
-
-        if (curQuestionIdx == review.questions.length - 1) {
-            setReview((prev) => {
-                return {...prev, current_question_id: 0, state: "Answered"}
-            })
-        } else {
-            setReview((prev) => {
-                return {...prev, current_question_id: review.questions[curQuestionIdx + 1].id}
-            })
+        if (!review) {
+            return
         }
-
+        if (review.status !== "Doing") {
+                return
+        }
+        dispatch(reviewActions.answerQuestion({answer}))
+        answerQuestionMutate(reviewId, answer)
     }
 
     return <>
         {
             question && <>
                 <div className="container mx-auto p-8">
-                    <QuestionProgress review={review}/>
+                    {/*<QuestionProgress review={review}/>*/}
                 </div>
 
                 <div className="container m-16 mx-auto max-w-4xl">
@@ -76,7 +87,8 @@ export default function Review() {
                                         key={order}
                                         variant="outlined"
                                         className="w-full max-w-xl m-4 self-center border-b-4"
-                                        onClick={() => answerQuestionHandler(order)}>
+                                        onClick={() => answerQuestionHandler(order)}
+                                    >
                                         <div className="flex">
                                             <Typography className="font-semibold">{order}</Typography>
                                             <Typography className="flex-1 font-semibold">{content}</Typography>
@@ -110,6 +122,12 @@ export default function Review() {
     </>
 }
 
-export const reviewLoader = () => {
-    store.dispatch(fetchLastDoingReview())
+export const reviewLoader = async () => {
+    const resp = await createReview({})
+    if (!resp.ok) {
+        throw new Error("Cannot create review")
+    } else {
+        const data = await resp.json()
+        return data.id
+    }
 }

@@ -1,8 +1,9 @@
-export const createReview = async () => {
+export const createReview = async ({signal}) => {
     const token = sessionStorage.getItem("token")
-    const response = await fetch(`${process.env.REACT_APP_BASE_URL}review/create`, {
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}review:create`, {
         method: 'POST',
         headers: {Authorization: token},
+        signal
     })
     return response
 }
@@ -20,11 +21,12 @@ export const answerQuestion = async (reviewId, answer) => {
     return response
 }
 
-export const getReview = async (reviewId) => {
+export const getReview = async ({reviewId, signal}) => {
     const token = sessionStorage.getItem("token")
     const response = await fetch(`${process.env.REACT_APP_BASE_URL}review/${reviewId}`, {
         method: 'GET',
         headers: {Authorization: token},
+        signal
     })
-    return response
+    return response.json()
 }

@@ -40,9 +40,9 @@ export const router = createBrowserRouter([
     {
         path: '/review',
         element: <SideMenu/>,
-        loader: serializeLoader(checkAuthTokenLoader, reviewLoader),
+        loader: checkAuthTokenLoader,
         children: [
-            {path: '', element: <Review/>}
+            {path: '', element: <Review/>, loader: reviewLoader}
         ]
     },
     {

@@ -12,20 +12,24 @@ const reviewSlice = createSlice({
                 return
             }
 
-            if (state.review.state === "Doing" && state.review.current_question_id === 0) {
+            if (state.review.status !== "Doing") {
+                return
+            }
+
+            if (state.review.current_question_id === 0) {
                 state.review.current_question_id = state.review.questions.first.id
             }
 
             const curQuestionIdx = state.review.questions.findIndex((q) => q.id == state.review.current_question_id)
 
-            if (state.questions[curQuestionIdx].standard_answer === action.payload.answer) {
+            if (state.review.questions[curQuestionIdx].standard_answer === action.payload.answer) {
                 state.review.questions[curQuestionIdx].is_correct = true
             }
 
             if (curQuestionIdx == state.review.questions.length - 1) {
-                state.review.state = "Answered"
+                state.review.status = "Answered"
                 state.review.current_question_id = 0
-            }else{
+            } else {
                 state.review.current_question_id = state.review.questions[curQuestionIdx + 1].id
             }
         }

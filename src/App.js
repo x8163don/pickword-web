@@ -6,6 +6,8 @@ import {Provider} from "react-redux";
 import store from "./store";
 import {useEffect} from "react";
 import {checkAuthTokenLoader, getAuthToken, getExpiredAt} from "./utils/auth";
+import {QueryClientProvider} from "@tanstack/react-query";
+import {queryClient} from "./api";
 
 function App() {
 
@@ -26,11 +28,13 @@ function App() {
 
 
     return (
-        <Provider store={store}>
-            <ThemeProvider>
-                <RouterProvider router={router}/>
-            </ThemeProvider>
-        </Provider>
+        <QueryClientProvider client={queryClient}>
+            <Provider store={store}>
+                <ThemeProvider>
+                    <RouterProvider router={router}/>
+                </ThemeProvider>
+            </Provider>
+        </QueryClientProvider>
     );
 }
 
