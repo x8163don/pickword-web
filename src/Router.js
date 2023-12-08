@@ -9,6 +9,7 @@ import Review, {reviewLoader} from "./pages/Review";
 import Account, {accountLoader} from "./pages/Account";
 import Word from "./pages/Word";
 import {checkAuthTokenLoader} from "./utils/auth";
+import ReviewSummary from "./pages/Review/ReviewSummary";
 
 export const router = createBrowserRouter([
     {
@@ -42,7 +43,8 @@ export const router = createBrowserRouter([
         element: <SideMenu/>,
         loader: checkAuthTokenLoader,
         children: [
-            {path: '', element: <Review/>, loader: reviewLoader}
+            {path: '', element: <Review/>, loader: reviewLoader},
+            {path: ':reviewId/summary', element: <ReviewSummary/>}
         ]
     },
     {

@@ -8,14 +8,14 @@ export const createReview = async ({signal}) => {
     return response
 }
 
-export const answerQuestion = async (reviewId, answer) => {
+export const answerQuestion = async ({reviewId, answer}) => {
     const token = sessionStorage.getItem("token")
     const response = await fetch(`${process.env.REACT_APP_BASE_URL}review:answer`, {
         method: 'POST',
         headers: {Authorization: token},
         body: JSON.stringify({
             review_id: reviewId,
-            answer: answer
+            answer
         })
     })
     return response

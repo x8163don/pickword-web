@@ -10,17 +10,13 @@ export default function QuestionProgress({review}) {
     const [progress, setProgress] = useState(0)
 
     useEffect(() => {
-        if (!review || review.current_question_id == 0) {
-            return
-        }
-
         const idx = review.questions.findIndex((q) => q.id == review.current_question_id)
-        setProgress(Math.round((idx + 1) / review.questions.length * 100))
+        setProgress(Math.round(idx / review.questions.length * 100))
 
         let continuousCountTmp = 0
-        for (let i = idx - 1; i > 0; i--) {
+        for (let i = idx - 1; i >= 0; i--) {
             if (review.questions[i].is_correct) {
-                continuousCountTmp++
+                continuousCountTmp += 1
             } else {
                 break
             }
@@ -28,18 +24,23 @@ export default function QuestionProgress({review}) {
 
         setContinuousCount(continuousCountTmp)
 
+        if (continuousCountTmp == 0) {
+            setShowText("")
+            setColor("gray")
+        }
+
         if (continuousCountTmp >= 1) {
             setShowText("")
             setColor("green")
         }
 
         if (continuousCountTmp >= 3) {
-            setShowText(`連續答對${continuousCount}題`)
+            setShowText(`連續答對${continuousCountTmp}題`)
             setColor("orange")
         }
 
         if (continuousCountTmp >= 5) {
-            setShowText(`連續答對${continuousCount}題`)
+            setShowText(`連續答對${continuousCountTmp}題`)
             setColor("red")
         }
 
