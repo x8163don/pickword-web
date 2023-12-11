@@ -1,3 +1,32 @@
+import {useQuery} from "@tanstack/react-query";
+import {getAuthToken} from "../../utils/auth";
+import {searchContent} from "../../api/material/inedx";
+import {Spinner} from "@material-tailwind/react";
+
 export default function MyMaterial() {
-    return <div>MyMaterial</div>
+
+    const {
+        data,
+        isLoading,
+        isError,
+        error
+    } = useQuery({
+        queryKey: ['material', getAuthToken()],
+        queryFn: ({signal}) => searchContent({signal})
+    });
+
+    if (isLoading) {
+        return <div className="h-screen flex justify-center items-center">
+            <Spinner size="lg"></Spinner>
+        </div>
+    }
+
+    if(isError) {
+        return <div>error</div>
+    }
+
+    return<div></div>
+}
+
+export const loader = () => {
 }

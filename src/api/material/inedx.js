@@ -15,3 +15,12 @@ export const addVideoAsMaterial = async ({videoID, sourceURL, captions, signal})
     })
     return response.json()
 }
+
+export const searchContent = async ({signal}) => {
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}material:search`, {
+        method: 'GET',
+        headers: {Authorization: getAuthToken()},
+        signal
+    })
+    return response.json()
+}
