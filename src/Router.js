@@ -10,6 +10,8 @@ import Account, {accountLoader} from "./pages/Account";
 import Word from "./pages/Word";
 import {checkAuthTokenLoader} from "./utils/auth";
 import ReviewSummary from "./pages/Review/ReviewSummary";
+import MyMaterial from "./pages/Material/MyMaterial";
+import AddMaterial from "./pages/Material/AddMaterail";
 
 export const router = createBrowserRouter([
     {
@@ -36,6 +38,15 @@ export const router = createBrowserRouter([
         loader: checkAuthTokenLoader,
         children: [
             {path: '', element: <Dashboard/>}
+        ]
+    },
+    {
+        path: '/material',
+        element: <SideMenu/>,
+        loader: checkAuthTokenLoader,
+        children: [
+            {path: '', element: <MyMaterial/>},
+            {path: 'add', element: <AddMaterial/>}
         ]
     },
     {

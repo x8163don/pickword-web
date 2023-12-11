@@ -10,6 +10,7 @@ import {
     Square2StackIcon,
     RocketLaunchIcon,
     UserCircleIcon,
+    VideoCameraIcon
 } from "@heroicons/react/24/solid";
 import {useNavigate} from "react-router-dom";
 
@@ -18,10 +19,11 @@ export default function Sidebar() {
     const navigate = useNavigate();
 
     const items = [
-        {id: 1, text: "主頁", icon: <HomeIcon className="h-5 w-5"/>, page: "/dashboard"},
-        {id: 2, text: "字卡", icon: <Square2StackIcon className="h-5 w-5"/>, page: "/word"},
-        {id: 3, text: "複習", icon: <RocketLaunchIcon className="h-5 w-5"/>, page: "/review"},
-        {id: 4, text: "帳戶", icon: <UserCircleIcon className="h-5 w-5"/>, page: "/account"},
+        {text: "主頁", icon: <HomeIcon className="h-5 w-5"/>, page: "/dashboard"},
+        {text: "影片", icon: <VideoCameraIcon className="h-5 w-5"/>, page: "/material"},
+        {text: "字卡", icon: <Square2StackIcon className="h-5 w-5"/>, page: "/word"},
+        {text: "複習", icon: <RocketLaunchIcon className="h-5 w-5"/>, page: "/review"},
+        {text: "帳戶", icon: <UserCircleIcon className="h-5 w-5"/>, page: "/account"},
     ]
 
     return <Card className="h-[calc(100vh)] w-full max-w-[18rem] p-4 shadow-xl shadow-blue-gray-900/5">
@@ -32,7 +34,7 @@ export default function Sidebar() {
             {
                 items.map((item, index) => (
                     <ListItem
-                        key={item.id}
+                        key={item.text}
                         onClick={() => {
                             navigate(item.page)
                         }}
