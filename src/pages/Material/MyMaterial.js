@@ -25,10 +25,12 @@ export default function MyMaterial() {
         return <div>error</div>
     }
 
-    return <div className="p6 flex gap-4 flex-wrap">
+    return <div className="flex justify-center gap-4 flex-wrap">
         {
             data.contents.map((item) => {
-                return <Card onClick={()=>{
+                return <Card
+                    key={item.source_id}
+                    onClick={()=>{
                 }}>
                     <CardBody className="w-[426px] h-[240px]">
                         <iframe
@@ -41,7 +43,4 @@ export default function MyMaterial() {
             })
         }
     </div>
-}
-
-export const loader = () => {
 }

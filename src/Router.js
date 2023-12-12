@@ -50,20 +50,20 @@ export const router = createBrowserRouter([
         ]
     },
     {
+        path: '/word',
+        element: <SideMenu/>,
+        loader: checkAuthTokenLoader,
+        children: [
+            {path: '', element: <Word/>}
+        ]
+    },
+    {
         path: '/review',
         element: <SideMenu/>,
         loader: checkAuthTokenLoader,
         children: [
             {path: '', element: <Review/>, loader: reviewLoader},
             {path: ':reviewId/summary', element: <ReviewSummary/>}
-        ]
-    },
-    {
-        path: '/word',
-        element: <SideMenu/>,
-        loader: checkAuthTokenLoader,
-        children: [
-            {path: '', element: <Word/>}
         ]
     },
     {
