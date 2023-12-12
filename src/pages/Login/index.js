@@ -1,18 +1,26 @@
-import {Card, CardHeader, CardBody, Button, Typography} from "@material-tailwind/react";
+import {Spinner,Card, CardHeader, CardBody, Button, Typography} from "@material-tailwind/react";
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {doLogin} from "../../utils/auth";
+import {useMutation} from "@tanstack/react-query";
 
 function Login() {
     const navigate = useNavigate();
 
-    const handleCallbackResponse = async (response) => {
-        try {
-            await doLogin(response.credential, "google")
+    const {
+        mutate: doLoginMutate,
+        isPending: isLoginPending,
+        isError: isLoginError,
+        error: loginError
+    } = useMutation({
+        mutationFn: doLogin,
+        onSuccess: () => {
             navigate("/dashboard")
-        } catch (error) {
-            console.log(error)
         }
+    });
+
+    const handleCallbackResponse = async (response) => {
+        doLoginMutate({thirtyPartyToken: response.credential, loginType: "google"})
     }
 
     useEffect(() => {
@@ -42,15 +50,19 @@ function Login() {
                     </Typography>
                 </CardHeader>
                 <CardBody className="flex flex-col gap-4">
-                    <Button id="g-login"
-                            size="lg"
-                            variant="outlined"
-                            color="blue-gray"
+                    {!isLoginPending && <Button id="g-login"
+                                                size="lg"
+                                                variant="outlined"
+                                                color="blue-gray"
                     >
                         <img src="https://docs.material-tailwind.com/icons/google.svg" alt="metamask"
                              className="h-6 w-6"/>
                         使用 Google 帳戶註冊
                     </Button>
+                    }
+                    {
+                        isLoginPending && <Spinner size="lg"></Spinner>
+                    }
                 </CardBody>
             </Card>
         </div>

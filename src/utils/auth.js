@@ -2,7 +2,7 @@ import {checkAuth, login, refresh} from "../api/account";
 import {redirect} from "react-router-dom";
 
 
-export const doLogin = async (thirtyPartyToken, loginType) => {
+export const doLogin = async ({thirtyPartyToken, loginType}) => {
     const resp = await login(thirtyPartyToken, loginType)
     if (resp.ok) {
         const tokenDetail = await resp.json()

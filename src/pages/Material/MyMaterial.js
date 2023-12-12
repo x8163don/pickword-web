@@ -1,7 +1,7 @@
 import {useQuery} from "@tanstack/react-query";
 import {getAuthToken} from "../../utils/auth";
 import {searchContent} from "../../api/material/inedx";
-import {Spinner} from "@material-tailwind/react";
+import {Spinner, Card, CardBody} from "@material-tailwind/react";
 
 export default function MyMaterial() {
 
@@ -21,11 +21,26 @@ export default function MyMaterial() {
         </div>
     }
 
-    if(isError) {
+    if (isError) {
         return <div>error</div>
     }
 
-    return<div></div>
+    return <div className="p6 flex gap-4 flex-wrap">
+        {
+            data.contents.map((item) => {
+                return <Card onClick={()=>{
+                }}>
+                    <CardBody className="w-[426px] h-[240px]">
+                        <iframe
+                            src={item.source_url}
+                            width="100%"
+                            height="100%"
+                        ></iframe>
+                    </CardBody>
+                </Card>
+            })
+        }
+    </div>
 }
 
 export const loader = () => {

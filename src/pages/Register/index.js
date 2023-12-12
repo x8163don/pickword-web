@@ -1,20 +1,27 @@
-import {Card, CardHeader, CardBody, Button, Typography} from "@material-tailwind/react";
+import {Card, CardHeader, CardBody, Button, Typography, Spinner} from "@material-tailwind/react";
 import {useNavigate} from "react-router-dom";
-import {AuthContext} from "../../context/AuthContext";
-import {useContext, useEffect} from "react";
+import {useEffect} from "react";
+import {useMutation} from "@tanstack/react-query";
+import {doLogin} from "../../utils/auth";
 
 function Register() {
 
     const navigate = useNavigate();
-    const authCtx = useContext(AuthContext)
+
+    const {
+        mutate: doLoginMutate,
+        isPending: isLoginPending,
+        isError: isLoginError,
+        error: loginError
+    } = useMutation({
+        mutationFn: doLogin,
+        onSuccess: () => {
+            navigate("/dashboard")
+        }
+    });
 
     const handleCallbackResponse = async (response) => {
-        try {
-            await authCtx.onLogin(response.credential, "google")
-            navigate("/dashboard")
-        } catch (error) {
-            console.log(error)
-        }
+        doLoginMutate({thirtyPartyToken: response.credential, loginType: "google"})
     }
 
     useEffect(() => {
@@ -44,6 +51,7 @@ function Register() {
                     </Typography>
                 </CardHeader>
                 <CardBody className="flex flex-col gap-4">
+                    {!isLoginPending &&
                     <Button
                         id="g-login"
                         size="lg"
@@ -55,6 +63,10 @@ function Register() {
                              className="h-6 w-6"/>
                         使用 Google 帳戶註冊
                     </Button>
+                    }
+                    {
+                        isLoginPending && <Spinner size="lg"></Spinner>
+                    }
                 </CardBody>
             </Card>
         </div>
