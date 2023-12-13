@@ -1,17 +1,19 @@
 import {useQuery} from "@tanstack/react-query";
 import {getAuthToken} from "../../utils/auth";
 import {searchContent} from "../../api/material/inedx";
-import {Spinner, Card, CardBody} from "@material-tailwind/react";
+import {Spinner, Card, CardBody,Button} from "@material-tailwind/react";
+import {useNavigate} from "react-router-dom";
 
-export default function MyMaterial() {
+export default function MyContent() {
 
+    const navigate = useNavigate();
     const {
         data,
         isLoading,
         isError,
         error
     } = useQuery({
-        queryKey: ['material', getAuthToken()],
+        queryKey: ['content', getAuthToken()],
         queryFn: ({signal}) => searchContent({signal})
     });
 
@@ -25,7 +27,16 @@ export default function MyMaterial() {
         return <div>error</div>
     }
 
-    return <div className="flex justify-center gap-4 flex-wrap">
+    const addContentHandler = ()=>{
+        navigate("/content/add")
+    }
+
+    return <div className="mx-auto max-w-5xl min-w-[64rem] p-6">
+        <div className="flex justify-end">
+            <Button onClick={addContentHandler}>新增影片</Button>
+        </div>
+
+        <div className="flex gap-4 flex-wrap">
         {
             data.contents.map((item) => {
                 return <Card
@@ -42,5 +53,6 @@ export default function MyMaterial() {
                 </Card>
             })
         }
+        </div>
     </div>
 }

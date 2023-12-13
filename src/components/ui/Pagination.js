@@ -1,7 +1,7 @@
 import {Button, IconButton} from "@material-tailwind/react";
 import {ArrowLeftIcon, ArrowRightIcon} from "@heroicons/react/24/outline";
 
-export function Pagination({current = 1, total = 1, to}) {
+export function Pagination({className, current = 1, total = 1, to}) {
 
     const getItemProps = (index) =>
         ({
@@ -32,7 +32,7 @@ export function Pagination({current = 1, total = 1, to}) {
     }
 
     return (
-        <div className="flex items-center gap-4">
+        <div className={"flex items-center gap-4 " + className}>
             <Button
                 variant="text"
                 className="flex items-center gap-2"

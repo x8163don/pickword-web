@@ -1,4 +1,4 @@
-import {createBrowserRouter, json} from "react-router-dom";
+import {createBrowserRouter} from "react-router-dom";
 import SingleColumn from "./components/layout/SingleColumn";
 import SideMenu from "./components/layout/SideMenu";
 import Home from "./pages/Home/index";
@@ -10,8 +10,8 @@ import Account, {accountLoader} from "./pages/Account";
 import Word from "./pages/Word";
 import {checkAuthTokenLoader} from "./utils/auth";
 import ReviewSummary from "./pages/Review/ReviewSummary";
-import MyMaterial from "./pages/Material/MyMaterial";
-import AddMaterial from "./pages/Material/AddMaterail";
+import MyContent from "./pages/Content/MyContent";
+import AddMaterial from "./pages/Content/AddContent";
 
 export const router = createBrowserRouter([
     {
@@ -41,11 +41,11 @@ export const router = createBrowserRouter([
         ]
     },
     {
-        path: '/material',
+        path: '/content',
         element: <SideMenu/>,
         loader: checkAuthTokenLoader,
         children: [
-            {path: '', element: <MyMaterial/>},
+            {path: '', element: <MyContent/>},
             {path: 'add', element: <AddMaterial/>}
         ]
     },

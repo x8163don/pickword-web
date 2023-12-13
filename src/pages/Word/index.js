@@ -29,17 +29,14 @@ export default function Word() {
         setTotalPage(pageWords.paginate.total_page)
     }, [pageWords])
 
-    return <div>
-
+    return <div className="min-w-[64rem] max-w-5xl mx-auto p-6">
         <Input
             icon={<MagnifyingGlassIcon className="w-5 h-5"/>}
             onChange={(e) => {
-            setSearchText(e.currentTarget.value)
-        }}>
+                setSearchText(e.currentTarget.value)
+            }}/>
 
-        </Input>
-
-        <div className="flex gap-4 flex-wrap">
+        <div className="flex gap-4 flex-wrap mb-6">
             {
                 isLoading && <Spinner size="lg"></Spinner>
             }
@@ -48,14 +45,15 @@ export default function Word() {
                     return <WordCard key={item.word_id} word={item.word}/>
                 })
             }
-
         </div>
 
-        <Pagination current={page}
-                    total={totalPage}
-                    to={(newPage) => {
-                        setPage(newPage)
-                    }}
+        <Pagination
+            className="justify-center"
+            current={page}
+            total={totalPage}
+            to={(newPage) => {
+                setPage(newPage)
+            }}
         />
     </div>
 }

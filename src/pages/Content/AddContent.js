@@ -77,7 +77,7 @@ export default function AddMaterial() {
 
 
     const openHandler = () => {
-        navigate("/material")
+        navigate("/content")
     }
 
     const insertVideoHandler = () => {

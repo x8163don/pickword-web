@@ -20,7 +20,7 @@ export default function Sidebar() {
 
     const items = [
         {text: "主頁", icon: <HomeIcon className="h-5 w-5"/>, page: "/dashboard"},
-        {text: "影片", icon: <VideoCameraIcon className="h-5 w-5"/>, page: "/material"},
+        {text: "影片", icon: <VideoCameraIcon className="h-5 w-5"/>, page: "/content"},
         {text: "字卡", icon: <Square2StackIcon className="h-5 w-5"/>, page: "/word"},
         {text: "複習", icon: <RocketLaunchIcon className="h-5 w-5"/>, page: "/review"},
         {text: "帳戶", icon: <UserCircleIcon className="h-5 w-5"/>, page: "/account"},
