@@ -13,6 +13,10 @@ export const addVideoAsMaterial = async ({videoID, sourceURL, captions, signal})
         headers: {Authorization: getAuthToken()},
         signal
     })
+
+    if (!response.ok) {
+        throw response.error()
+    }
     return response.json()
 }
 

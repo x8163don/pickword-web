@@ -32,7 +32,7 @@ export default function AddMaterial() {
     } = useMutation({
         mutationFn: addVideoAsMaterial,
         onSuccess: () => {
-            navigate("/material")
+            navigate("/content")
         }
     })
 
