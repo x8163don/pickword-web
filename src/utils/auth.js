@@ -1,5 +1,7 @@
 import {checkAuth, login, refresh} from "../api/account";
 import {redirect} from "react-router-dom";
+import {accountActions} from "../store/account";
+import store from "../store";
 
 
 export const doLogin = async ({thirtyPartyToken, loginType}) => {
@@ -9,6 +11,12 @@ export const doLogin = async ({thirtyPartyToken, loginType}) => {
         sessionStorage.setItem("token", tokenDetail.token)
         sessionStorage.setItem("refreshToken", tokenDetail.refresh_token)
     }
+}
+
+export const doLogout = () => {
+    sessionStorage.removeItem("token")
+    sessionStorage.removeItem("refreshToken")
+    store.dispatch(accountActions.removeAccountDetail())
 }
 
 export const getAuthToken = () => {

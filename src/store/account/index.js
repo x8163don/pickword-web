@@ -6,6 +6,9 @@ const accountSlice = createSlice({
     reducers: {
         replaceAccountDetail: (state, action) => {
             state.account = action.payload;
+        },
+        removeAccountDetail: (state) => {
+            state.account = null
         }
     }
 })

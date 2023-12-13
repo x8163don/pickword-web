@@ -57,7 +57,6 @@ function Login() {
                     >
                         <img src="https://docs.material-tailwind.com/icons/google.svg" alt="metamask"
                              className="h-6 w-6"/>
-                        使用 Google 帳戶註冊
                     </Button>
                     }
                     {
