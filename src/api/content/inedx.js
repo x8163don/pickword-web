@@ -1,7 +1,7 @@
 import {getAuthToken} from "../../utils/auth";
 
 export const addVideoAsMaterial = async ({videoID, sourceURL, captions, signal}) => {
-    const response = await fetch(`${process.env.REACT_APP_BASE_URL}material:addVideo`, {
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}content:addVideo`, {
         method: 'POST',
         body: JSON.stringify({
             type: 'video',
@@ -21,7 +21,7 @@ export const addVideoAsMaterial = async ({videoID, sourceURL, captions, signal})
 }
 
 export const searchContent = async ({signal}) => {
-    const response = await fetch(`${process.env.REACT_APP_BASE_URL}material:search`, {
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}content:search`, {
         method: 'GET',
         headers: {Authorization: getAuthToken()},
         signal

@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {useMutation, useQuery} from "@tanstack/react-query";
 import {getCaptions} from "../../api/video/youtube";
 import {CheckBadgeIcon, ExclamationCircleIcon} from "@heroicons/react/24/solid";
-import {addVideoAsMaterial} from "../../api/material/inedx";
+import {addVideoAsMaterial} from "../../api/content/inedx";
 
 export default function AddMaterial() {
     const navigate = useNavigate()

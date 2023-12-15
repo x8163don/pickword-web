@@ -1,6 +1,6 @@
 import {useQuery} from "@tanstack/react-query";
 import {getAuthToken} from "../../utils/auth";
-import {searchContent} from "../../api/material/inedx";
+import {searchContent} from "../../api/content/inedx";
 import {Spinner, Card, CardBody,Button} from "@material-tailwind/react";
 import {useNavigate} from "react-router-dom";
 
