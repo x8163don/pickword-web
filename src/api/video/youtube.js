@@ -1,8 +1,8 @@
 import {getAuthToken} from "../../utils/auth";
 
-export const getCaptions = (async ({videoID, signal}) => {
+export const getVideoDetail = (async ({videoID, signal}) => {
     const token = getAuthToken()
-    const usResp = await fetch(`${process.env.REACT_APP_BASE_URL}caption/${videoID}/en-US`, {
+    const usResp = await fetch(`${process.env.REACT_APP_BASE_URL}yt-video/${videoID}/en-US`, {
         method: 'GET',
         headers: {Authorization: token},
         signal
@@ -12,7 +12,7 @@ export const getCaptions = (async ({videoID, signal}) => {
         return usResp.json()
     }
 
-    const ukResp = await fetch(`${process.env.REACT_APP_BASE_URL}caption/${videoID}/en-GB`, {
+    const ukResp = await fetch(`${process.env.REACT_APP_BASE_URL}yt-video/${videoID}/en-GB`, {
         method: 'GET',
         headers: {Authorization: token},
         signal

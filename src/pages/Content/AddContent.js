@@ -2,9 +2,9 @@ import {Chip, Dialog, DialogHeader, DialogBody, DialogFooter, Button, Spinner, I
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useMutation, useQuery} from "@tanstack/react-query";
-import {getCaptions} from "../../api/video/youtube";
+import {getVideoDetail} from "../../api/video/youtube";
 import {CheckBadgeIcon, ExclamationCircleIcon} from "@heroicons/react/24/solid";
-import {addVideoAsMaterial} from "../../api/content/inedx";
+import {addVideo} from "../../api/content/inedx";
 
 export default function AddMaterial() {
     const navigate = useNavigate()
@@ -20,7 +20,7 @@ export default function AddMaterial() {
         isLoading: isCaptionLoading,
     } = useQuery({
         queryKey: ['captions', youtubeVideoId],
-        queryFn: ({signal}) => getCaptions({videoID: youtubeVideoId, signal}),
+        queryFn: ({signal}) => getVideoDetail({videoID: youtubeVideoId, signal}),
         enabled: !!isYoutubeVideo
     })
 
@@ -30,10 +30,7 @@ export default function AddMaterial() {
         isError: isAddVideoMaterialError,
         error: addVideoMaterialError
     } = useMutation({
-        mutationFn: addVideoAsMaterial,
-        onSuccess: () => {
-            navigate("/content")
-        }
+        mutationFn: addVideo
     })
 
     useEffect(() => {
@@ -86,16 +83,21 @@ export default function AddMaterial() {
         })
 
         addVideoMaterialMutate({
+            title: caption.title,
+            description: caption.description,
             videoID: youtubeVideoId,
             sourceURL: `https://www.youtube.com/embed/${youtubeVideoId}`,
             captions: insertCaptions,
+        }, {
+            onSuccess: () => {
+                openHandler()
+            }
         })
     }
 
     return <Dialog open={true}
                    handler={openHandler}
                    size="xl">
-        <DialogHeader/>
         <DialogBody>
             <Input label="Youtube 影片網址" onChange={(e) => setInputURL(e.target.value)}></Input>
 

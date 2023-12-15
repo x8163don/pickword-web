@@ -1,8 +1,20 @@
 import {useQuery} from "@tanstack/react-query";
 import {getAuthToken} from "../../utils/auth";
 import {searchContent} from "../../api/content/inedx";
-import {Spinner, Card, CardBody,Button} from "@material-tailwind/react";
+import {
+    Typography,
+    Spinner,
+    Card,
+    CardBody,
+    Button,
+    List,
+    ListItem,
+    ListItemPrefix,
+    ListItemSuffix,
+    Collapse,
+} from "@material-tailwind/react";
 import {useNavigate} from "react-router-dom";
+import ContentItem from "./ContentItem";
 
 export default function MyContent() {
 
@@ -24,10 +36,11 @@ export default function MyContent() {
     }
 
     if (isError) {
+        // FIXME：Provide error page
         return <div>error</div>
     }
 
-    const addContentHandler = ()=>{
+    const addContentHandler = () => {
         navigate("/content/add")
     }
 
@@ -36,23 +49,13 @@ export default function MyContent() {
             <Button onClick={addContentHandler}>新增影片</Button>
         </div>
 
-        <div className="flex gap-4 flex-wrap">
-        {
-            data.contents.map((item) => {
-                return <Card
-                    key={item.source_id}
-                    onClick={()=>{
-                }}>
-                    <CardBody className="w-[426px] h-[240px]">
-                        <iframe
-                            src={item.source_url}
-                            width="100%"
-                            height="100%"
-                        ></iframe>
-                    </CardBody>
-                </Card>
-            })
-        }
-        </div>
+
+        <List>
+            {
+                data && data.contents.map((content) => {
+                    return <ContentItem content={content}/>
+                })
+            }
+        </List>
     </div>
 }
