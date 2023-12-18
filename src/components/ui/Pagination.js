@@ -21,7 +21,7 @@ export function Pagination({className, current = 1, total = 1, to}) {
     };
 
     const toHandler = (index) => {
-        if (current == index) return;
+        if (current === index) return;
         to(index)
     }
 

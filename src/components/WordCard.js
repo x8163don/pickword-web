@@ -1,4 +1,4 @@
-import {Button, Card, CardBody, CardFooter, ButtonGroup, Typography} from "@material-tailwind/react";
+import {Button, Card, CardBody, ButtonGroup, Typography} from "@material-tailwind/react";
 import {useRef, useState} from "react";
 
 export default function WordCard({className, word}) {
