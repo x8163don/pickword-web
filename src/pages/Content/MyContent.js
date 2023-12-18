@@ -2,16 +2,9 @@ import {useQuery} from "@tanstack/react-query";
 import {getAuthToken} from "../../utils/auth";
 import {searchContent} from "../../api/content/inedx";
 import {
-    Typography,
     Spinner,
-    Card,
-    CardBody,
     Button,
     List,
-    ListItem,
-    ListItemPrefix,
-    ListItemSuffix,
-    Collapse,
 } from "@material-tailwind/react";
 import {useNavigate} from "react-router-dom";
 import ContentItem from "./ContentItem";
