@@ -7,7 +7,7 @@ const reviewSlice = createSlice({
         replaceReview: (state, action) => {
             const tmpReview = action.payload
 
-            if (tmpReview.status == "Doing" && tmpReview.current_question_id === 0) {
+            if (tmpReview.status === "Doing" && tmpReview.current_question_id === 0) {
                 tmpReview.current_question_id = tmpReview.questions[0].id
             }
 
@@ -22,7 +22,7 @@ const reviewSlice = createSlice({
                 return
             }
 
-            const curQuestionIdx = state.review.questions.findIndex((q) => q.id == state.review.current_question_id)
+            const curQuestionIdx = state.review.questions.findIndex((q) => q.id === state.review.current_question_id)
 
             if (!!state.review.questions[curQuestionIdx].learner_answer) {
                 return
@@ -35,12 +35,12 @@ const reviewSlice = createSlice({
                 state.review.questions[curQuestionIdx].learner_answer = action.payload.answer
             }
 
-            if (curQuestionIdx == state.review.questions.length - 1) {
+            if (curQuestionIdx === state.review.questions.length - 1) {
                 state.review.status = "Answered"
                 state.review.current_question_id = 0
             }
         },
-        nextQuestion: (state, action) => {
+        nextQuestion: (state) => {
             if (!state.review) {
                 return
             }
@@ -53,7 +53,7 @@ const reviewSlice = createSlice({
                 return
             }
 
-            const curQuestionIdx = state.review.questions.findIndex((q) => q.id == state.review.current_question_id)
+            const curQuestionIdx = state.review.questions.findIndex((q) => q.id === state.review.current_question_id)
             if (!state.review.questions[curQuestionIdx].learner_answer) {
                 return
             }

@@ -1,4 +1,4 @@
-import {Chip, Dialog, DialogHeader, DialogBody, DialogFooter, Button, Spinner, Input} from "@material-tailwind/react";
+import {Chip, Dialog, DialogBody, DialogFooter, Button, Spinner, Input} from "@material-tailwind/react";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useMutation, useQuery} from "@tanstack/react-query";
@@ -12,7 +12,6 @@ export default function AddMaterial() {
     const [inputURL, setInputURL] = useState("")
     const [isYoutubeVideo, setIsYoutubeVideo] = useState(null)
     const [youtubeVideoId, setYoutubeVideoId] = useState(null)
-    const [importantKeyWord, setImportantKeyWord] = useState([])
 
     const {
         data: caption,
@@ -27,8 +26,6 @@ export default function AddMaterial() {
     const {
         mutate: addVideoMaterialMutate,
         isLoading: isAddVideoMaterialLoading,
-        isError: isAddVideoMaterialError,
-        error: addVideoMaterialError
     } = useMutation({
         mutationFn: addVideo
     })
@@ -57,20 +54,7 @@ export default function AddMaterial() {
             setYoutubeVideoId(false)
             setIsYoutubeVideo(false)
         }
-    }, [inputURL])
-
-    useEffect(() => {
-        if (!caption) {
-            return
-        }
-
-        const keywords = Object.keys(caption.frequency_of_words).map((key) => {
-            return {word: key, frequency: caption.frequency_of_words[key]}
-        });
-        const sortedKeyWords = keywords.filter((item) => item.frequency > 1).sort((a, b) => b.frequency - a.frequency)
-        setImportantKeyWord([...sortedKeyWords.keys()])
-
-    }, [caption])
+    }, [inputURL,refetchCaption])
 
 
     const openHandler = () => {

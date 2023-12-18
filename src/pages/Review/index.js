@@ -19,9 +19,6 @@ export default function Review() {
 
     const {
         data: reviewData,
-        isLoading: isReviewLoading,
-        isError: isReviewError,
-        error: reviewError
     } = useQuery({
         queryKey: ["review", reviewId],
         queryFn: ({signal}) => getReview({reviewId, signal}),
@@ -32,7 +29,7 @@ export default function Review() {
         if (reviewData && !review) {
             dispatch(reviewActions.replaceReview(reviewData))
         }
-    }, [reviewData])
+    }, [reviewData, review, dispatch])
 
     useEffect(() => {
         if (!review) {
@@ -43,14 +40,14 @@ export default function Review() {
             navigate(`/review/${review.id}/summary`)
         }
 
-        setQuestion((prev) => {
-            if (review.current_question_id == 0) {
+        setQuestion(() => {
+            if (review.current_question_id === 0) {
                 return review.questions[0]
             }
 
-            return review.questions.find((q) => q.id == review.current_question_id)
+            return review.questions.find((q) => q.id === review.current_question_id)
         })
-    }, [review])
+    }, [review,navigate])
 
     return <>
         {

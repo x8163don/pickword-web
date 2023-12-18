@@ -15,8 +15,6 @@ export default function Word() {
     const {
         data: pageWords,
         isLoading,
-        isError,
-        error,
     } = useQuery({
         queryKey: ['followWord', {page, text: searchText}],
         queryFn: ({signal}) => searchFollowedWords({page, text: searchText, signal})
