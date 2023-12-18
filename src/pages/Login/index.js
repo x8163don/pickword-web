@@ -1,4 +1,4 @@
-import {Spinner,Card, CardHeader, CardBody, Button, Typography} from "@material-tailwind/react";
+import {Button, Card, CardBody, CardHeader, Spinner, Typography} from "@material-tailwind/react";
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {doLogin} from "../../utils/auth";
@@ -17,15 +17,13 @@ function Login() {
         }
     });
 
-    const handleCallbackResponse = async (response) => {
-        doLoginMutate({thirtyPartyToken: response.credential, loginType: "google"})
-    }
-
     useEffect(() => {
         // eslint-disable-next-line no-undef
         google.accounts.id.initialize({
             client_id: process.env.REACT_APP_OAUTH2_CLIENT_ID,
-            callback: handleCallbackResponse,
+            callback: (response) => {
+                doLoginMutate({thirtyPartyToken: response.credential, loginType: "google"})
+            },
         })
 
         // eslint-disable-next-line no-undef
@@ -33,7 +31,7 @@ function Login() {
             document.getElementById("g-login"),
             {width: 278, theme: "outline", size: "large", type: "standard", text: "signin_with"},
         )
-    }, [handleCallbackResponse])
+    }, [doLoginMutate])
 
     return (
         <div className="flex-1 flex justify-center items-center bg-gray-200">

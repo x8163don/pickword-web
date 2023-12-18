@@ -6,7 +6,7 @@ export default function ContentItem({content}) {
     let icon = <div></div>
 
     if (content.platform === 'Youtube') {
-        icon = <img className="w-8 h-8" src="https://www.youtube.com/s/desktop/e1f38dd5/img/favicon_32x32.png"/>
+        icon = <img alt="logo" className="w-8 h-8" src="https://www.youtube.com/s/desktop/e1f38dd5/img/favicon_32x32.png"/>
     }
 
 

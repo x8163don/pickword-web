@@ -54,7 +54,7 @@ export default function AddMaterial() {
             setYoutubeVideoId(false)
             setIsYoutubeVideo(false)
         }
-    }, [inputURL,refetchCaption])
+    }, [inputURL, refetchCaption])
 
 
     const openHandler = () => {
@@ -89,6 +89,7 @@ export default function AddMaterial() {
 
                 <div className="mt-6 w-[640px] h-[360px]">
                     <iframe
+                        alt={youtubeVideoId}
                         src={`https://www.youtube.com/embed/${youtubeVideoId}`}
                         width="100%"
                         height="100%"
