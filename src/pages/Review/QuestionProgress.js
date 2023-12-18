@@ -51,7 +51,7 @@ export default function QuestionProgress({review}) {
                 color={color} variant="h6">
                 {showText}
             </Typography>
-            {continuousCount > 3 && <FireIcon className={"h-5 w-5 " + `text-${color}-500`}/>}
+            {continuousCount > 3 && <FireIcon className={`h-5 w-5 text-${color}-500`}/>}
         </div>
 
         <Progress color={color} value={progress}/>

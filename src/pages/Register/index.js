@@ -1,4 +1,4 @@
-import {Card, CardHeader, CardBody, Button, Typography, Spinner} from "@material-tailwind/react";
+import {Button, Card, CardBody, CardHeader, Spinner, Typography} from "@material-tailwind/react";
 import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 import {useMutation} from "@tanstack/react-query";
@@ -18,15 +18,13 @@ function Register() {
         }
     });
 
-    const handleCallbackResponse = async (response) => {
-        doLoginMutate({thirtyPartyToken: response.credential, loginType: "google"})
-    }
-
     useEffect(() => {
         // eslint-disable-next-line no-undef
         google.accounts.id.initialize({
             client_id: process.env.REACT_APP_OAUTH2_CLIENT_ID,
-            callback: handleCallbackResponse,
+            callback: (response) => {
+                doLoginMutate({thirtyPartyToken: response.credential, loginType: "google"})
+            },
         })
 
         // eslint-disable-next-line no-undef
@@ -34,7 +32,7 @@ function Register() {
             document.getElementById("g-login"),
             {width: 278, theme: "outline", size: "large", type: "standard", text: "signup_with"},
         )
-    }, [handleCallbackResponse])
+    }, [doLoginMutate])
 
     return (
         <div className="flex h-screen justify-center items-center bg-gray-200">
