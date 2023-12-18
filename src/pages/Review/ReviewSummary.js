@@ -17,8 +17,6 @@ export default function ReviewSummary() {
     const {
         data: review,
         isLoading: isLoadingReview,
-        isError: isErrorReview,
-        error: errorReview
     } = useQuery({
         queryKey: ['review', param.reviewId],
         queryFn: ({signal}) => getReview({reviewId: param.reviewId, signal})
@@ -27,8 +25,6 @@ export default function ReviewSummary() {
     const {
         data: words,
         isLoading: isLoadingWords,
-        isError: isErrorWords,
-        error: errorWords
     } = useQuery({
         queryKey: ['word', {ids: wordIDs}],
         queryFn: ({signal}) => getByIDs({ids: wordIDs, signal}),

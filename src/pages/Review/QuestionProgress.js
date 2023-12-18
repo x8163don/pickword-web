@@ -10,7 +10,7 @@ export default function QuestionProgress({review}) {
     const [progress, setProgress] = useState(0)
 
     useEffect(() => {
-        const idx = review.questions.findIndex((q) => q.id == review.current_question_id)
+        const idx = review.questions.findIndex((q) => q.id === review.current_question_id)
         setProgress(Math.round(idx / review.questions.length * 100))
 
         let continuousCountTmp = 0
@@ -24,7 +24,7 @@ export default function QuestionProgress({review}) {
 
         setContinuousCount(continuousCountTmp)
 
-        if (continuousCountTmp == 0) {
+        if (continuousCountTmp === 0) {
             setShowText("")
             setColor("gray")
         }

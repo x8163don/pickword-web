@@ -11,9 +11,6 @@ export default function QuestionContent({review, question}) {
 
     const {
         mutate: answerQuestionMutate,
-        isLoading: isAnswering,
-        isError: isAnsweringError,
-        error: answerError
     } = useMutation({
         mutationFn: answerQuestion,
     })
@@ -27,7 +24,7 @@ export default function QuestionContent({review, question}) {
             return
         }
 
-        const curQuestionIdx = review.questions.findIndex((q) => q.id == review.current_question_id)
+        const curQuestionIdx = review.questions.findIndex((q) => q.id === review.current_question_id)
 
         if (!!review.questions[curQuestionIdx].learner_answer) {
             return

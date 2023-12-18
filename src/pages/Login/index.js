@@ -10,8 +10,6 @@ function Login() {
     const {
         mutate: doLoginMutate,
         isPending: isLoginPending,
-        isError: isLoginError,
-        error: loginError
     } = useMutation({
         mutationFn: doLogin,
         onSuccess: () => {
@@ -35,7 +33,7 @@ function Login() {
             document.getElementById("g-login"),
             {width: 278, theme: "outline", size: "large", type: "standard", text: "signin_with"},
         )
-    }, [])
+    }, [handleCallbackResponse])
 
     return (
         <div className="flex-1 flex justify-center items-center bg-gray-200">

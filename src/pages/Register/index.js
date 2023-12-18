@@ -11,8 +11,6 @@ function Register() {
     const {
         mutate: doLoginMutate,
         isPending: isLoginPending,
-        isError: isLoginError,
-        error: loginError
     } = useMutation({
         mutationFn: doLogin,
         onSuccess: () => {
@@ -36,7 +34,7 @@ function Register() {
             document.getElementById("g-login"),
             {width: 278, theme: "outline", size: "large", type: "standard", text: "signup_with"},
         )
-    }, [])
+    }, [handleCallbackResponse])
 
     return (
         <div className="flex h-screen justify-center items-center bg-gray-200">

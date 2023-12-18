@@ -13,7 +13,7 @@ export default function QuestionController({review}) {
     const [isCorrect, setIsCorrect] = useState(false)
 
     useEffect(() => {
-        const currentQuestionIdx = review.questions.findIndex((q) => q.id == review.current_question_id)
+        const currentQuestionIdx = review.questions.findIndex((q) => q.id === review.current_question_id)
         setIsAnsweredQuestion(!!review.questions[currentQuestionIdx].learner_answer)
         setIsCorrect(review.questions[currentQuestionIdx].is_correct)
     }, [review])

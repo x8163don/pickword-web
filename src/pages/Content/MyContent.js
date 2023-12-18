@@ -16,7 +16,6 @@ export default function MyContent() {
         data,
         isLoading,
         isError,
-        error
     } = useQuery({
         queryKey: ['content', getAuthToken()],
         queryFn: ({signal}) => searchContent({signal})
