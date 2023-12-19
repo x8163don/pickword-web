@@ -56,7 +56,7 @@ function Login() {
                     </Button>
                     }
                     {
-                        isLoginPending && <Spinner size="lg"></Spinner>
+                        isLoginPending && <Spinner className="mx-auto" size="lg"></Spinner>
                     }
                 </CardBody>
             </Card>
