@@ -7,6 +7,7 @@ import {CheckBadgeIcon, ExclamationCircleIcon} from "@heroicons/react/24/solid";
 import {addVideo} from "../../api/content/inedx";
 
 export default function AddMaterial() {
+    const cacheTime = 24 * 60 * 60 * 1000
     const navigate = useNavigate()
 
     const [inputURL, setInputURL] = useState("")
@@ -20,6 +21,8 @@ export default function AddMaterial() {
     } = useQuery({
         queryKey: ['captions', youtubeVideoId],
         queryFn: ({signal}) => getVideoDetail({videoID: youtubeVideoId, signal}),
+        staleTime: cacheTime,
+        cacheTime: cacheTime,
         enabled: !!isYoutubeVideo
     })
 
