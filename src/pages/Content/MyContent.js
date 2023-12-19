@@ -8,6 +8,7 @@ import {
 } from "@material-tailwind/react";
 import {useNavigate} from "react-router-dom";
 import ContentItem from "./ContentItem";
+import Loading from "../../components/ui/Loading";
 
 export default function MyContent() {
 
@@ -22,9 +23,7 @@ export default function MyContent() {
     });
 
     if (isLoading) {
-        return <div className="h-screen flex justify-center items-center">
-            <Spinner size="lg"></Spinner>
-        </div>
+        return <Loading />
     }
 
     if (isError) {
