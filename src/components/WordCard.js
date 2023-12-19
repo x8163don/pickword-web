@@ -13,7 +13,7 @@ export default function WordCard({className, word}) {
     }
 
     return <>
-        <Card className={`mt-6 w-96 ${className}`}>
+        <Card className={`mt-6 w-96 max-h-52 min-h-52 ${className}`}>
             <CardBody>
                 <div className="flex mb-2">
                     <Typography variant="h5" color="blue-gray" className="mb-2 mr-4"> {word.text} </Typography>

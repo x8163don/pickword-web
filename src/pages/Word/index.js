@@ -5,6 +5,7 @@ import {Input, Spinner} from "@material-tailwind/react";
 import {Pagination} from "../../components/ui/Pagination";
 import WordCard from "../../components/WordCard";
 import {MagnifyingGlassIcon} from "@heroicons/react/24/solid";
+import Loading from "../../components/ui/Loading";
 
 export default function Word() {
 
@@ -27,16 +28,17 @@ export default function Word() {
         setTotalPage(pageWords.paginate.total_page)
     }, [pageWords])
 
-    return <div className="min-w-[64rem] max-w-5xl mx-auto p-6">
+    return <div className="flex flex-col min-w-[80rem] max-w-7xl mx-auto h-screen p-6">
         <Input
             icon={<MagnifyingGlassIcon className="w-5 h-5"/>}
             onChange={(e) => {
+                setPage(1)
                 setSearchText(e.currentTarget.value)
             }}/>
 
-        <div className="flex gap-4 flex-wrap mb-6">
+        <div className="w-100 grow flex flex-wrap gap-4 p-4">
             {
-                isLoading && <Spinner size="lg"></Spinner>
+                isLoading && <Loading/>
             }
             {
                 !isLoading && pageWords.followed_words.map((item) => {
