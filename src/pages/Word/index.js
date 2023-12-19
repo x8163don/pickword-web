@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {searchFollowedWords} from "../../api/learner";
 import {useQuery} from "@tanstack/react-query";
-import {Input, Spinner} from "@material-tailwind/react";
+import {Input} from "@material-tailwind/react";
 import {Pagination} from "../../components/ui/Pagination";
 import WordCard from "../../components/WordCard";
 import {MagnifyingGlassIcon} from "@heroicons/react/24/solid";
