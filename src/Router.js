@@ -12,6 +12,7 @@ import {checkAuthTokenLoader} from "./utils/auth";
 import ReviewSummary from "./pages/Review/ReviewSummary";
 import MyContent from "./pages/Content/MyContent";
 import AddMaterial from "./pages/Content/AddContent";
+import NotFound from "./pages/NotFound";
 
 export const router = createBrowserRouter([
     {
@@ -72,6 +73,13 @@ export const router = createBrowserRouter([
         loader: serializeLoader(checkAuthTokenLoader, accountLoader),
         children: [
             {path: '', element: <Account/>}
+        ]
+    },
+    {
+        path: '*',
+        element: <SingleColumn/>,
+        children: [
+            {path: '*', element: <NotFound/>}
         ]
     }
 ])
