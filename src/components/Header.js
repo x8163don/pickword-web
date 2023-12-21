@@ -29,7 +29,7 @@ export default function Header() {
                                 className="hidden lg:inline-block"
                             >
                                 <NavLink to="/register">
-                                    <Typography variant="h6" className="text-white">立即加入</Typography>
+                                    <Typography variant="h6" className="text-white">立即註冊</Typography>
                                 </NavLink>
                             </Button>
                         </>
