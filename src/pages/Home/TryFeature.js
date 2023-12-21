@@ -3,7 +3,7 @@ import {Chip, Card, CardBody, CardHeader, CardFooter, Typography, Tooltip} from 
 import {Link} from "react-router-dom";
 import {ArrowTopRightOnSquareIcon} from "@heroicons/react/24/outline";
 
-export default function TryFeature() {
+export default function TryFeature(factory, deps) {
 
     const videos = useMemo(() => {
         return [
@@ -767,7 +767,7 @@ export default function TryFeature() {
                 }
             }
         ]
-    })
+    }, [])
 
     const [selectedVideo, setSelectedVideo] = useState([])
     const [frequencyArray, setFrequencyArray] = useState([])
