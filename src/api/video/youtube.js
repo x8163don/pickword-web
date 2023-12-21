@@ -2,26 +2,16 @@ import {getAuthToken} from "../../utils/auth";
 
 export const getVideoDetail = (async ({videoID, signal}) => {
     const token = getAuthToken()
-    const usResp = await fetch(`${process.env.REACT_APP_BASE_URL}yt-video/${videoID}/en-US`, {
+    const resp = await fetch(`${process.env.REACT_APP_BASE_URL}yt-video/${videoID}`, {
         method: 'GET',
         headers: {Authorization: token},
         signal
     })
 
-    if (usResp.ok) {
-        return usResp.json()
+    if (resp.ok) {
+        return resp.json()
+    } else {
+        throw new Error("Cannot get captions")
     }
-
-    const ukResp = await fetch(`${process.env.REACT_APP_BASE_URL}yt-video/${videoID}/en-GB`, {
-        method: 'GET',
-        headers: {Authorization: token},
-        signal
-    })
-
-    if (ukResp.ok) {
-        return ukResp.json()
-    }
-
-    throw new Error("Cannot get captions")
 })
 

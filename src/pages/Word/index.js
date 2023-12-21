@@ -28,7 +28,7 @@ export default function Word() {
         setTotalPage(pageWords.paginate.total_page)
     }, [pageWords])
 
-    return <div className="flex flex-col min-w-[80rem] max-w-7xl mx-auto h-screen p-6">
+    return <div className="flex flex-col min-w-[80rem] max-w-7xl mx-auto h-screen pt-16">
         <Input
             icon={<MagnifyingGlassIcon className="w-5 h-5"/>}
             onChange={(e) => {

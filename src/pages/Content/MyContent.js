@@ -49,7 +49,7 @@ export default function MyContent() {
         </div>
     }
 
-    return <div className="mx-auto max-w-5xl min-w-[64rem] p-6">
+    return <div className="mx-auto max-w-5xl min-w-[64rem] pt-16">
         <div className="flex justify-end">
             <Button onClick={addContentHandler}>新增影片</Button>
         </div>
