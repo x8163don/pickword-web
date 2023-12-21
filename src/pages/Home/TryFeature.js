@@ -800,7 +800,7 @@ export default function TryFeature() {
 
         setFrequencyArray(result)
 
-    }, [selectedVideo])
+    }, [selectedVideo,videos])
 
 
     return <>
@@ -820,7 +820,7 @@ export default function TryFeature() {
                         <CardHeader>
                             <img
                                 src={video.thumbnail}
-                                alt="card-image"
+                                alt="thumbnail"
                             />
                         </CardHeader>
                         <CardBody>
@@ -843,7 +843,7 @@ export default function TryFeature() {
             }
         </div>
         <div className="p-16 flex gap-4 flex-wrap justify-center items-center">
-            {frequencyArray.length == 0 && <Typography>請點選你有興趣的影片，看看哪些單字更重要！</Typography>}
+            {frequencyArray.length === 0 && <Typography>請點選你有興趣的影片，看看哪些單字更重要！</Typography>}
 
             {
                 frequencyArray.map((item) => {

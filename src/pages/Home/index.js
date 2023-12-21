@@ -49,7 +49,7 @@ function Home() {
 
     return <main className="container mx-auto flex flex-col items-center">
         <div className="mt-24 mb-24 flex flex-col items-center">
-            <img src={Logo} className="h-32 w-32 mb-4"/>
+            <img src={Logo} alt="logo" className="h-32 w-32 mb-4"/>
             <Typography variant="h1" color="blue-gray">訂製專屬於你的英文學習體驗</Typography>
             <Typography variant="h3" color="gray">自然而然培養語感，用複利效果學習單字</Typography>
             <Button className="mt-4" color="light-blue" size="lg" onClick={toRegisterHandler}>
