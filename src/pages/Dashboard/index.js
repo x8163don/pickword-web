@@ -31,11 +31,34 @@ export default function Dashboard() {
             <Card>
                 <CardBody>
                     <Typography variant="h5" color="blue-gray" className="mb-6">學習進度</Typography>
-                    <Progress
-                        className="w-96"
-                        value={learningProgress.mean_achieve_word_count}
-                        size={learningProgress.total_follow_words}
-                    />
+
+                    <div className="flex flex-col items-start gap-4">
+                        <div className="flex items-center">
+                            <span className="mx-auto block h-2 w-2 rounded-full bg-red-900 content-['']"/>
+                            <Typography variant="h6" color="gray"
+                                        className="ml-2">單字庫總數：{learningProgress.total_follow_words}</Typography>
+                        </div>
+
+                        <div className="flex items-center">
+                            <span className="mx-auto block h-2 w-2 rounded-full bg-red-900 content-['']"/>
+                            <Typography variant="h6" color="gray"
+                                        className="ml-2">新單字：{learningProgress.new_word}</Typography>
+                        </div>
+
+                        <div className="flex items-center justify-start">
+                            <span className="mx-auto block h-2 w-2 rounded-full bg-red-900 content-['']"/>
+                            <Typography variant="h6" color="gray"
+                                        className="ml-2">學習中：{learningProgress.learning_word}</Typography>
+                        </div>
+
+                        <div className="flex items-center justify-start">
+                            <span className="mx-auto block h-2 w-2 rounded-full bg-red-900 content-['']"/>
+                            <Typography variant="h6" color="gray"
+                                        className="ml-2">已掌握：{learningProgress.master_word}</Typography>
+                        </div>
+                    </div>
+
+
                 </CardBody>
             </Card>
 
