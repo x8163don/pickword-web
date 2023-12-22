@@ -5,8 +5,9 @@ import {useParams} from "react-router-dom";
 import {getReview} from "../../api/review";
 import {queryClient} from "../../api";
 import WordCard from "../../components/WordCard";
-import {Typography, Spinner} from "@material-tailwind/react";
+import {Typography} from "@material-tailwind/react";
 import ReviewSummaryController from "./ReviewSummaryController";
+import Loading from "../../components/ui/Loading";
 
 export default function ReviewSummary() {
 
@@ -49,7 +50,7 @@ export default function ReviewSummary() {
     }, [wordIDs])
 
     if (isLoadingReview || isLoadingWords) {
-        return <Spinner color="green" className="h-16 w-16 text-gray-900/50"/>
+        return <Loading/>
     }
 
     return <div className="flex flex-col h-screen">
