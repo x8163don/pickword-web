@@ -2,17 +2,29 @@ import {Card, CardBody, Progress, Typography} from "@material-tailwind/react";
 import {useQuery} from "@tanstack/react-query";
 import {getAuthToken} from "../../utils/auth";
 import {getLearningProgress} from "../../api/learner";
+import Loading from "../../components/ui/Loading";
+import Error from "../System/Error";
 
 export default function Dashboard() {
     const cacheTime = 5 * 60 * 1000
     const {
         data: learningProgress,
+        isLoading,
+        isError,
     } = useQuery({
         queryKey: ['learner', 'progress', getAuthToken()],
         queryFn: ({signal}) => getLearningProgress({signal}),
         staleTime: cacheTime,
         cacheTime: cacheTime,
     })
+
+    if (isLoading) {
+        return <Loading/>
+    }
+
+    if (isError) {
+        return <Error/>
+    }
 
     return <main className="mx-auto max-w-5xl min-w-[64rem] pt-16">
         <div className="flex gap-4">
