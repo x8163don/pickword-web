@@ -16,3 +16,13 @@ export const searchFollowedWords = async ({page, limit = 9, text, signal}) => {
     })
     return response.json()
 }
+
+export const getLearningProgress = async ({signal}) => {
+    const token = getAuthToken();
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}learner:progress`, {
+        method: 'GET',
+        headers: {Authorization: token},
+        signal
+    })
+    return response.json()
+}
