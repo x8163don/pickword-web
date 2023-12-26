@@ -1,4 +1,4 @@
-import {Card, CardBody, Progress, Typography} from "@material-tailwind/react";
+import {Card, CardBody, Typography} from "@material-tailwind/react";
 import {useQuery} from "@tanstack/react-query";
 import {getAuthToken} from "../../utils/auth";
 import {getLearningProgress} from "../../api/learner";
