@@ -36,7 +36,7 @@ export default function ContentItem({content}) {
                     content.status !== "Initial" &&
                     <IconButton variant="text">
                         <Tooltip content="在新視窗中開啟">
-                            <Link to={content.source_url} target="_blank" rel="noopener noreferrer">
+                            <Link to={`https://www.youtube.com/watch?v=${content.source_id}`} target="_blank" rel="noopener noreferrer">
                                 <ArrowTopRightOnSquareIcon className="w-6 h-6"/>
                             </Link>
                         </Tooltip>
