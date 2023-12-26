@@ -1,4 +1,4 @@
-import Logo from "../../assets/logo512.png";
+import Logo from "../../assets/logo/logo.png";
 import ReviewImg from "../../assets/review.png";
 import WordImg from "../../assets/word.png";
 import {
