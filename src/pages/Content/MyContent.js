@@ -1,25 +1,29 @@
 import {useQuery} from "@tanstack/react-query";
 import {getAuthToken} from "../../utils/auth";
 import {searchContent} from "../../api/content/inedx";
-import {Button, List, Typography,} from "@material-tailwind/react";
+import {Button, Typography,} from "@material-tailwind/react";
 import {useNavigate} from "react-router-dom";
-import ContentItem from "./ContentItem";
+import ContentNav from "./ContentNav";
 import Loading from "../../components/ui/Loading";
 import VideoLesson from "../../assets/content/video_lesson.svg"
+import ContentCard from "./ContentCard";
+import {useState} from "react";
 
 export default function MyContent() {
-
     const navigate = useNavigate();
+    const [orderBy, setOrderBy] = useState("id desc")
+
     const addContentHandler = () => {
         navigate("/content/add")
     }
+
     const {
         data,
         isLoading,
         isError,
     } = useQuery({
-        queryKey: ['content', getAuthToken()],
-        queryFn: ({signal}) => searchContent({signal})
+        queryKey: ['content', getAuthToken(), {orderBy}],
+        queryFn: ({signal}) => searchContent({signal, orderBy})
     });
 
     if (isLoading) {
@@ -49,18 +53,22 @@ export default function MyContent() {
         </div>
     }
 
-    return <div className="mx-auto max-w-5xl min-w-[64rem] pt-16">
-        <div className="flex justify-end">
-            <Button onClick={addContentHandler}>新增影片</Button>
-        </div>
+    const onOrderByChangeHandler = (v) => {
+        setOrderBy(v)
+    }
 
+    return <div className="w-full">
+        <ContentNav
+            onAddContentClick={addContentHandler}
+            onOrderByChange={onOrderByChangeHandler}
+        ></ContentNav>
 
-        <List>
+        <div className="grid md:grid-cols-3 lg:grid-cols-4 3xl:grid-cols-5 gap-6 p-8">
             {
-                data && data.contents.map((content) => {
-                    return <ContentItem content={content}/>
+                data.contents.map((content) => {
+                    return <ContentCard key={content.id} content={content}/>
                 })
             }
-        </List>
+        </div>
     </div>
 }
