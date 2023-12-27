@@ -1,11 +1,12 @@
 import {getAuthToken} from "../../utils/auth";
 
-export const addVideo = async ({title, description, videoID, sourceURL, captions, signal}) => {
+export const addVideo = async ({title, description,thumbnail, videoID, sourceURL, captions, signal}) => {
     const response = await fetch(`${process.env.REACT_APP_BASE_URL}content:addVideo`, {
         method: 'POST',
         body: JSON.stringify({
             title: title,
             description: description,
+            thumbnail: thumbnail,
             type: 'video',
             platform: 'youtube',
             source_id: videoID,

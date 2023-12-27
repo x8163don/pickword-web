@@ -72,6 +72,7 @@ export default function AddMaterial() {
         addVideoMaterialMutate({
             title: caption.title,
             description: caption.description,
+            thumbnail: caption.thumbnail,
             videoID: youtubeVideoId,
             sourceURL: `https://www.youtube.com/embed/${youtubeVideoId}`,
             captions: insertCaptions,

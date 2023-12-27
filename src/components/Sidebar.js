@@ -13,6 +13,7 @@ import {
     VideoCameraIcon
 } from "@heroicons/react/24/solid";
 import {useNavigate} from "react-router-dom";
+import Logo from "../assets/logo/logo.png";
 
 export default function Sidebar() {
 
@@ -26,9 +27,12 @@ export default function Sidebar() {
         {text: "帳戶", icon: <UserCircleIcon className="h-5 w-5"/>, page: "/account"},
     ]
 
-    return <Card className="h-[calc(100vh)] w-full max-w-[18rem] p-4 shadow-xl shadow-blue-gray-900/5">
-        <div className="mb-2 p-4">
-            <Typography variant="h5" color="blue-gray"> </Typography>
+    return <Card className="h-[calc(100vh)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 bg-gray-100 rounded-none">
+        <div className="mb-2 flex items-center gap-4 p-4">
+            <img src={Logo} alt="brand" className="h-8 w-8"/>
+            <Typography variant="h5" color="blue-gray">
+                PickWord
+            </Typography>
         </div>
         <List>
             {
