@@ -1,5 +1,5 @@
 import {
-    Tooltip, Typography, Card, CardHeader, CardBody, CardFooter, IconButton,
+    Tooltip, Typography, Card, CardHeader, CardBody, CardFooter
 } from "@material-tailwind/react";
 import {ArrowTopRightOnSquareIcon} from "@heroicons/react/24/outline";
 import {Link} from "react-router-dom";
@@ -28,7 +28,8 @@ export default function ContentCard({content}) {
 
         <CardFooter className="flex items-center justify-end">
             <Tooltip content="在新視窗中開啟">
-                <Link to={`https://www.youtube.com/watch?v=${content.source_id}`} target="_blank" rel="noopener noreferrer">
+                <Link to={`https://www.youtube.com/watch?v=${content.source_id}`} target="_blank"
+                      rel="noopener noreferrer">
                     <ArrowTopRightOnSquareIcon className="w-5 h-5"/>
                 </Link>
             </Tooltip>
