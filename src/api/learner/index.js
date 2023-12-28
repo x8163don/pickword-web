@@ -1,6 +1,6 @@
 import {getAuthToken} from "../../utils/auth";
 
-export const searchFollowedWords = async ({page, limit = 9, text, signal}) => {
+export const searchFollowedWords = async ({page, limit = 12, text, signal}) => {
     const token = getAuthToken();
     const url = new URL(`${process.env.REACT_APP_BASE_URL}followedWord:search`)
     if (text) {

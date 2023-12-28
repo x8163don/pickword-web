@@ -1,11 +1,10 @@
 import {useEffect, useState} from "react";
 import {searchFollowedWords} from "../../api/learner";
 import {useQuery} from "@tanstack/react-query";
-import {Input} from "@material-tailwind/react";
 import {Pagination} from "../../components/ui/Pagination";
 import WordCard from "../../components/WordCard";
-import {MagnifyingGlassIcon} from "@heroicons/react/24/solid";
 import Loading from "../../components/ui/Loading";
+import WordNav from "./WordNav";
 
 export default function Word() {
 
@@ -28,23 +27,29 @@ export default function Word() {
         setTotalPage(pageWords.paginate.total_page)
     }, [pageWords])
 
-    return <div className="flex flex-col min-w-[80rem] max-w-7xl mx-auto h-screen pt-16">
-        <Input
-            icon={<MagnifyingGlassIcon className="w-5 h-5"/>}
-            onChange={(e) => {
-                setPage(1)
-                setSearchText(e.currentTarget.value)
-            }}/>
+    const onSearchTextChange = (text) => {
+        setPage(1)
+        setSearchText(text)
+    }
 
-        <div className="w-100 grow flex flex-wrap gap-4 p-4">
+    let content = ""
+    if (isLoading) {
+        content = <Loading/>
+    } else {
+        content = <div className="flex-1 grid md:grid-cols-3 lg:grid-cols-4 grid-row-3 gap-6 p-8">
             {
-                isLoading && <Loading/>
-            }
-            {
-                !isLoading && pageWords.followed_words.map((item) => {
+                pageWords.followed_words.map((item) => {
                     return <WordCard key={item.word_id} word={item.word}/>
                 })
             }
+        </div>
+    }
+
+    return <div className="flex flex-col">
+        <WordNav onSearchTextChange={onSearchTextChange}></WordNav>
+
+        <div className="flex-1">
+            {content}
         </div>
 
         <Pagination
