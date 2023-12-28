@@ -35,7 +35,6 @@ export default function Sidebar() {
             {
                 items.map((item, index) => (
                     <NavLink
-                        exact
                         key={item.text}
                         to={item.page}
                         className={({isActive}) => (isActive ? "bg-gray-400 rounded-md text-gray-50" : "") +" py-2 px-4"}
