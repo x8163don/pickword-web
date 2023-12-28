@@ -39,7 +39,7 @@ export default function Word() {
     if (isLoading) {
         content = <Loading/>
     } else {
-        content = <div className="flex-1 grid md:grid-cols-3 lg:grid-cols-4 grid-row-3 gap-6 p-8">
+        content = <div className="flex-1 grid md:grid-cols-3 lg:grid-cols-4 grid-rows-3 gap-6 p-8">
             {
                 pageWords.followed_words.map((item) => {
                     return <WordCard key={item.word_id}

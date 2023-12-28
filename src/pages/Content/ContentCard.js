@@ -6,8 +6,7 @@ import {Link} from "react-router-dom";
 
 export default function ContentCard({content}) {
 
-    return <Card className="overflow-hidden"
-    >
+    return <Card className="overflow-hidden" >
         <CardHeader
             floated={false}
             shadow={false}
@@ -34,6 +33,5 @@ export default function ContentCard({content}) {
                 </Link>
             </Tooltip>
         </CardFooter>
-
     </Card>
 }
