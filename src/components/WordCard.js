@@ -2,7 +2,6 @@ import {Card, CardBody, Typography} from "@material-tailwind/react";
 
 export default function WordCard({className, word, speakType, languageType}) {
 
-
     const speakHandler = () => {
         let audio = ""
         if (speakType === "us") {

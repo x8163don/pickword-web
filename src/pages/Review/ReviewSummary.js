@@ -56,13 +56,17 @@ export default function ReviewSummary() {
     return <div className="flex flex-col h-screen">
         <div className="container mx-auto grow overflow-y-scroll">
             <Typography variant="h1">複習結算</Typography>
-            <div className="flex flex-wrap gap-x-6 ">
+            <div className="flex flex-wrap gap-6 ">
                 {
                     wordIDs.length > 0 && review.questions.map((q) => {
                         const id = q.word_ids[0]
                         const word = words.word_dic[id]
+                        console.log(word)
                         return <WordCard className={q.is_correct ? "" : "border-2 border-red-500"} key={id}
-                                         word={word}></WordCard>
+                                         word={word}
+                                         languageType="zh"
+                                         speakType="us"
+                        ></WordCard>
                     })
                 }
             </div>
