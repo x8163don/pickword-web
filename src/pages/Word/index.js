@@ -12,6 +12,9 @@ export default function Word() {
     const [page, setPage] = useState(1)
     const [totalPage, setTotalPage] = useState(1)
 
+    const [speakType, setSpeakType] = useState("us")
+    const [languageType, setLanguageType] = useState("zh")
+
     const {
         data: pageWords,
         isLoading,
@@ -39,14 +42,26 @@ export default function Word() {
         content = <div className="flex-1 grid md:grid-cols-3 lg:grid-cols-4 grid-row-3 gap-6 p-8">
             {
                 pageWords.followed_words.map((item) => {
-                    return <WordCard key={item.word_id} word={item.word}/>
+                    return <WordCard key={item.word_id}
+                                     word={item.word}
+                                     speakType={speakType}
+                                     languageType={languageType}
+                    />
                 })
             }
         </div>
     }
 
     return <div className="flex flex-col">
-        <WordNav onSearchTextChange={onSearchTextChange}></WordNav>
+        <WordNav
+            onSearchTextChange={onSearchTextChange}
+            onSpeakTypeChange={(v) => {
+                setSpeakType(v)
+            }}
+            onLanguageTypeChange={(v) => {
+                setLanguageType(v)
+            }}
+        ></WordNav>
 
         <div className="flex-1">
             {content}

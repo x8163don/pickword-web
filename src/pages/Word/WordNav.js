@@ -1,14 +1,47 @@
-import {IconButton, Input, Navbar, Option, Select, Tooltip, Typography} from "@material-tailwind/react";
-import {useState} from "react";
-import {PlusIcon} from "@heroicons/react/24/outline";
+import {IconButton, Input, Navbar, Typography} from "@material-tailwind/react";
 import {MagnifyingGlassIcon} from "@heroicons/react/24/solid";
+import {LanguageIcon, SpeakerWaveIcon} from "@heroicons/react/24/outline";
+import {useState} from "react";
 
+export default function WordNav({onSearchTextChange, onSpeakTypeChange, onLanguageTypeChange}) {
 
-export default function WordNav({onSearchTextChange}) {
+    const [speakType, setSpeakType] = useState("us")
+    const [languageType, setLanguageType] = useState("zh")
+
+    const speakTypeChangeHandler = () => {
+        const newType = speakType === "us" ? "uk" : "us";
+        setSpeakType(newType)
+        onSpeakTypeChange(newType)
+    }
+
+    const languageTypeChangeHandler = () => {
+        const newType = languageType === "zh" ? "en" : "zh";
+        setLanguageType(newType)
+        onLanguageTypeChange(newType)
+    }
 
     return <Navbar className="max-w-full flex justify-between rounded-none">
         <div className="my-auto">
             <Typography variant="h6" color="gray">字卡</Typography>
+        </div>
+
+        <div className="flex gap-2">
+            <IconButton
+                className="hover:text-gray-800"
+                variant="outlined"
+                onClick={speakTypeChangeHandler}
+            >
+                <SpeakerWaveIcon className="w-6 h-6"/>
+                <div className="uppercase">{speakType}</div>
+            </IconButton>
+
+            <IconButton
+                className="hover:text-gray-800"
+                variant="outlined"
+                onClick={languageTypeChangeHandler}
+            >
+                <LanguageIcon className="w-6 h-6"/>
+            </IconButton>
         </div>
 
         <div className="flex gap-4">
