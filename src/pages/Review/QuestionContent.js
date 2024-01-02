@@ -33,7 +33,7 @@ export default function QuestionContent({review, question}) {
             return
         }
         new Audio(word.us_pronounce[0]).play()
-    },[words,question])
+    }, [words, question?.word_ids])
 
     useEffect(() => {
         if (!isLoading && !isError) {
