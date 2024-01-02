@@ -32,15 +32,14 @@ export default function QuestionContent({review, question}) {
         if (!word) {
             return
         }
-
         new Audio(word.us_pronounce[0]).play()
-    })
+    },[words,question])
 
     useEffect(() => {
         if (!isLoading && !isError) {
             speakHandler()
         }
-    }, [isLoading, isError])
+    }, [isLoading, isError, speakHandler])
 
     const answerQuestionHandler = async (answer) => {
         if (!review) {
@@ -71,7 +70,7 @@ export default function QuestionContent({review, question}) {
 
         <div className="flex flex-col p-6">
             {
-                question.choices.split(',').map((choice, index) => {
+                question.choices.split(',').map((choice) => {
                         const choiceArr = choice.split(":")
                         const order = choiceArr[0]
                         const content = choiceArr[1]
