@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux";
 import {useMutation, useQuery} from "@tanstack/react-query";
 import {answerQuestion} from "../../api/review";
 import {getByIDs} from "../../api/word";
-import {useEffect} from "react";
+import {useCallback, useEffect} from "react";
 
 
 export default function QuestionContent({review, question}) {
@@ -27,20 +27,20 @@ export default function QuestionContent({review, question}) {
         enabled: question.word_ids.length > 0
     });
 
-    const speakHandler = () => {
+    const speakHandler = useCallback(() => {
         const word = words.word_dic[question?.word_ids[0]]
         if (!word) {
             return
         }
 
         new Audio(word.us_pronounce[0]).play()
-    }
+    })
 
     useEffect(() => {
         if (!isLoading && !isError) {
             speakHandler()
         }
-    }, [isLoading, isError,speakHandler])
+    }, [isLoading, isError])
 
     const answerQuestionHandler = async (answer) => {
         if (!review) {
@@ -60,7 +60,6 @@ export default function QuestionContent({review, question}) {
         dispatch(reviewActions.answerQuestion({answer}))
         answerQuestionMutate({reviewId: review.id, answer})
     }
-
 
 
     return <>
