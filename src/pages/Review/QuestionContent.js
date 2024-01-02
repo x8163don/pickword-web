@@ -27,11 +27,20 @@ export default function QuestionContent({review, question}) {
         enabled: question.word_ids.length > 0
     });
 
+    const speakHandler = () => {
+        const word = words.word_dic[question?.word_ids[0]]
+        if (!word) {
+            return
+        }
+
+        new Audio(word.us_pronounce[0]).play()
+    }
+
     useEffect(() => {
         if (!isLoading && !isError) {
             speakHandler()
         }
-    }, [isLoading, isError])
+    }, [isLoading, isError,speakHandler])
 
     const answerQuestionHandler = async (answer) => {
         if (!review) {
@@ -52,14 +61,7 @@ export default function QuestionContent({review, question}) {
         answerQuestionMutate({reviewId: review.id, answer})
     }
 
-    const speakHandler = () => {
-        const word = words.word_dic[question?.word_ids[0]]
-        if (!word) {
-            return
-        }
 
-        new Audio(word.us_pronounce[0]).play()
-    }
 
     return <>
         <Typography variant="h2" className="mb-5">請選擇正確答案</Typography>
