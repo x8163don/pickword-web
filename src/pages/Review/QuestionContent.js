@@ -1,8 +1,10 @@
 import {Button, Typography} from "@material-tailwind/react";
 import {reviewActions} from "../../store/review";
 import {useDispatch} from "react-redux";
-import {useMutation} from "@tanstack/react-query";
+import {useMutation, useQuery} from "@tanstack/react-query";
 import {answerQuestion} from "../../api/review";
+import {getByIDs} from "../../api/word";
+import {useEffect} from "react";
 
 
 export default function QuestionContent({review, question}) {
@@ -14,6 +16,22 @@ export default function QuestionContent({review, question}) {
     } = useMutation({
         mutationFn: answerQuestion,
     })
+
+    const {
+        data: words,
+        isLoading,
+        isError,
+    } = useQuery({
+        queryKey: ['word', {ids: question.word_ids}],
+        queryFn: ({signal}) => getByIDs({ids: question.word_ids, signal}),
+        enabled: question.word_ids.length > 0
+    });
+
+    useEffect(() => {
+        if (!isLoading && !isError) {
+            speakHandler()
+        }
+    }, [isLoading, isError])
 
     const answerQuestionHandler = async (answer) => {
         if (!review) {
@@ -34,10 +52,21 @@ export default function QuestionContent({review, question}) {
         answerQuestionMutate({reviewId: review.id, answer})
     }
 
+    const speakHandler = () => {
+        const word = words.word_dic[question?.word_ids[0]]
+        if (!word) {
+            return
+        }
+
+        new Audio(word.us_pronounce[0]).play()
+    }
 
     return <>
         <Typography variant="h2" className="mb-5">請選擇正確答案</Typography>
-        <Typography variant="h3" className="text-center">{question.topic}</Typography>
+        <Typography variant="h3"
+                    className="text-center cursor-pointer hover:text-yellow-800"
+                    onClick={speakHandler}
+        >{question.topic}</Typography>
 
         <div className="flex flex-col p-6">
             {
