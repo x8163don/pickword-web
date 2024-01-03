@@ -810,6 +810,7 @@ export default function TryFeature(factory, deps) {
             {
                 videos.map((video) => {
                     return <Card
+                        key={video.id}
                         className={`cursor-pointer flex-1 ${selectedVideo.includes(video.id) ? "border-solid border-lime-300 border-2" : ""}`}
                         onClick={() => {
                             if (selectedVideo.includes(video.id)) {

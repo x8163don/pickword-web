@@ -57,12 +57,15 @@ function Home() {
             </Button>
         </div>
 
-        {/*<div className="h-[calc(100vh-122px)]">*/}
-        {/*    <video className="w-50 rounded-lg" autoPlay muted>*/}
-        {/*        <source src="https://docs.material-tailwind.com/demo.mp4" type="video/mp4"/>*/}
-        {/*        Your browser does not support the video tag.*/}
-        {/*    </video>*/}
-        {/*</div>*/}
+        <div className="h-[calc(100vh-122px)]">
+            <iframe
+                    className="w-screen rounded-lg h-full xl:max-w-screen-xl xl:max-h-[549px] lg:max-w-screen-lg lg:max-h-[439px] md:max-w-screen-md md:max-h-[329px]"
+                    src="https://www.youtube.com/embed/O1bEyUI_Ang?si=z1iyHCn5t0DHgA43&autoplay=1&controls=0"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+            ></iframe>
+        </div>
 
         <div className="w-[176px] h-4 bg-blue-700"></div>
         <div className="w-full container mx-auto p-32">
