@@ -60,8 +60,8 @@ function Home() {
         <div className="h-[calc(100vh-122px)]">
             <iframe
                     title="Demo"
-                    className="w-screen rounded-lg h-full xl:max-w-screen-xl xl:max-h-[549px] lg:max-w-screen-lg lg:max-h-[439px] md:max-w-screen-md md:max-h-[329px]"
-                    src="https://www.youtube.com/embed/O1bEyUI_Ang?si=z1iyHCn5t0DHgA43&autoplay=1&controls=0"
+                    className="w-screen rounded-lg h-full xl:max-w-screen-xl xl:max-h-[720px] lg:max-w-screen-lg lg:max-h-[608px] md:max-w-screen-md md:max-h-[432px]"
+                    src="https://www.youtube.com/embed/O1bEyUI_Ang?si=z1iyHCn5t0DHgA43&autoplay=1&controls=0&vq=hd1080"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
