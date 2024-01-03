@@ -58,13 +58,11 @@ function Home() {
         </div>
 
         <div className="h-[calc(100vh-122px)]">
-            <iframe
-                    title="Demo"
+            <iframe src="https://drive.google.com/file/d/1q8b98fBfH6HPgV8r2Ow_UI7Gsa06SvQs/preview"
                     className="w-screen rounded-lg h-full xl:max-w-screen-xl xl:max-h-[720px] lg:max-w-screen-lg lg:max-h-[608px] md:max-w-screen-md md:max-h-[432px]"
-                    src="https://www.youtube.com/embed/O1bEyUI_Ang?si=z1iyHCn5t0DHgA43&autoplay=1&controls=0&vq=hd1080"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
+                    width="1280"
+                    height="768"
+                    allow="autoplay"
             ></iframe>
         </div>
 
