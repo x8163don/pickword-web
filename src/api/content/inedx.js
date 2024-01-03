@@ -23,9 +23,9 @@ export const addVideo = async ({title, description, thumbnail, videoID, sourceUR
     return response.ok
 }
 
-export const searchContent = async ({signal, orderBy}) => {
+export const searchContent = async ({signal, orderBy, limit}) => {
     let url = `${process.env.REACT_APP_BASE_URL}content:search?`;
-    let params = new URLSearchParams({order_by: orderBy,})
+    let params = new URLSearchParams({order_by: orderBy, limit})
     const response = await fetch(url + params.toString(), {
         method: 'GET',
         headers: {Authorization: getAuthToken()},

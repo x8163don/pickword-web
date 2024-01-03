@@ -22,8 +22,8 @@ export default function MyContent() {
         isLoading,
         isError,
     } = useQuery({
-        queryKey: ['content', getAuthToken(), {orderBy}],
-        queryFn: ({signal}) => searchContent({signal, orderBy})
+        queryKey: ['content', getAuthToken(), {orderBy, limit: 0}],
+        queryFn: ({signal}) => searchContent({signal, orderBy, limit: 0})
     });
 
     if (isLoading) {
