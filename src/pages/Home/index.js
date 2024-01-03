@@ -58,7 +58,8 @@ function Home() {
         </div>
 
         <div className="h-[calc(100vh-122px)]">
-            <iframe src="https://drive.google.com/file/d/1q8b98fBfH6HPgV8r2Ow_UI7Gsa06SvQs/preview"
+            <iframe title="demo video"
+                    src="https://drive.google.com/file/d/1q8b98fBfH6HPgV8r2Ow_UI7Gsa06SvQs/preview"
                     className="w-screen rounded-lg h-full xl:max-w-screen-xl xl:max-h-[720px] lg:max-w-screen-lg lg:max-h-[608px] md:max-w-screen-md md:max-h-[432px]"
                     width="1280"
                     height="768"
