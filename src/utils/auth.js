@@ -3,7 +3,6 @@ import {redirect} from "react-router-dom";
 import {accountActions} from "../store/account";
 import store from "../store";
 
-
 export const doLogin = async ({thirtyPartyToken, loginType}) => {
     const resp = await login(thirtyPartyToken, loginType)
     if (resp.ok) {

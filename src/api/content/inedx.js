@@ -33,3 +33,13 @@ export const searchContent = async ({signal, orderBy, limit}) => {
     })
     return response.json()
 }
+
+export const getContentByID = async ({id, signal}) => {
+    let url = `${process.env.REACT_APP_BASE_URL}content/${id}`
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {Authorization: getAuthToken()},
+        signal
+    })
+    return response.json()
+}

@@ -18,7 +18,7 @@ export default function Sidebar() {
         {text: "主頁", icon: <HomeIcon className="h-6 w-6"/>, page: "/dashboard"},
         {text: "影片", icon: <VideoCameraIcon className="h-6 w-6"/>, page: "/content"},
         {text: "字卡", icon: <Square2StackIcon className="h-6 w-6"/>, page: "/word"},
-        {text: "複習", icon: <RocketLaunchIcon className="h-6 w-6"/>, page: "/review"},
+        {text: "複習", icon: <RocketLaunchIcon className="h-6 w-6"/>, page: "/review/setting"},
         {text: "帳戶", icon: <UserCircleIcon className="h-6 w-6"/>, page: "/account"},
     ]
 

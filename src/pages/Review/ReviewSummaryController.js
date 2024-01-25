@@ -10,7 +10,7 @@ export default function ReviewSummaryController() {
 
     const keepReviewHandler = () => {
         dispatch(reviewActions.resetReview(null))
-        navigate("/review")
+        navigate("/review/setting")
     }
 
     return <div className="container mx-auto h-36 flex justify-end items-center">
