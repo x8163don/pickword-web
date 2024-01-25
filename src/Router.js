@@ -5,10 +5,11 @@ import Home from "./pages/Home/index";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
-import Review, {reviewLoader} from "./pages/Review";
 import Account, {accountLoader} from "./pages/Account";
 import Word from "./pages/Word";
 import {checkAuthTokenLoader} from "./utils/auth";
+import Review, {reviewLoader} from "./pages/Review";
+import ReviewSetting from "./pages/Review/ReviewSetting";
 import ReviewSummary from "./pages/Review/ReviewSummary";
 import MyContent from "./pages/Content/MyContent";
 import AddMaterial from "./pages/Content/AddContent";
@@ -65,6 +66,7 @@ export const router = createBrowserRouter([
         loader: checkAuthTokenLoader,
         children: [
             {path: '', element: <Review/>, loader: reviewLoader},
+            {path: 'setting', element: <ReviewSetting/>},
             {path: ':reviewId/summary', element: <ReviewSummary/>}
         ],
         errorElement: <Error/>
