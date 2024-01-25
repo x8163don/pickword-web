@@ -99,7 +99,7 @@ export default function ReviewSetting() {
                                 setMode(name)
                             }}
                         >
-                            <img className="p-2 border rounded-lg h-20 w-20" src={src}/>
+                            <img className="p-2 border rounded-lg h-20 w-20" src={src} alt={label}/>
                             <Radio
                                 name="mode"
                                 checked={mode === name}

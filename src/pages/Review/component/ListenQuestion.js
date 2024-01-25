@@ -32,7 +32,6 @@ export default function ListenQuestion({review, question}) {
 
     const {
         data: content,
-        isLoading,
     } = useQuery({
         queryKey: ['content', question.payload.content_id],
         queryFn: ({signal}) => getContentByID({signal, id: question.payload.content_id}),
@@ -61,7 +60,7 @@ export default function ListenQuestion({review, question}) {
                 }
             })
         }
-    }, [question.id, content])
+    }, [question.id, question.payload.material_id, content])
 
     useEffect(() => {
         if (currentAnswer.findIndex((n) => n === 0) !== -1) {
@@ -70,7 +69,7 @@ export default function ListenQuestion({review, question}) {
         const answer = currentAnswer.join(",")
         dispatch(reviewActions.answerQuestion({answer}))
         answerQuestionMutate({reviewId: review.id, answer})
-    }, [currentAnswer])
+    }, [currentAnswer, answerQuestionMutate])
 
     useEffect(() => {
         const dict = new Map()
@@ -83,7 +82,7 @@ export default function ListenQuestion({review, question}) {
         const answers = question.standard_answer.split(",")
         setStandardAnswers(answers)
         setCurrentAnswer(new Array(answers.length).fill(0))
-    }, [question.id])
+    }, [question.id, question.standard_answer])
 
     const choiceHandler = (no) => {
         const nextIndex = currentAnswer.findIndex((n) => n === 0)
@@ -91,7 +90,7 @@ export default function ListenQuestion({review, question}) {
             return
         }
 
-        if (standardAnswers[nextIndex] == no) {
+        if (standardAnswers[nextIndex] === no) {
             setCurrentAnswer(prev => {
                 const newState = Array.from(prev)
                 newState[nextIndex] = no
