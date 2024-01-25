@@ -69,7 +69,7 @@ export default function ListenQuestion({review, question}) {
         const answer = currentAnswer.join(",")
         dispatch(reviewActions.answerQuestion({answer}))
         answerQuestionMutate({reviewId: review.id, answer})
-    }, [currentAnswer, answerQuestionMutate])
+    }, [currentAnswer, answerQuestionMutate, dispatch, review.id])
 
     useEffect(() => {
         const dict = new Map()
@@ -82,7 +82,7 @@ export default function ListenQuestion({review, question}) {
         const answers = question.standard_answer.split(",")
         setStandardAnswers(answers)
         setCurrentAnswer(new Array(answers.length).fill(0))
-    }, [question.id, question.standard_answer])
+    }, [question.id, question.standard_answer, question.choices])
 
     const choiceHandler = (no) => {
         const nextIndex = currentAnswer.findIndex((n) => n === 0)
