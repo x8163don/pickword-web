@@ -1,10 +1,11 @@
 import {useEffect, useState} from "react";
-import {searchFollowedWords} from "../../api/learner";
-import {useQuery} from "@tanstack/react-query";
+import {changeMasteredWord, searchFollowedWords} from "../../api/learner";
+import {useMutation, useQuery} from "@tanstack/react-query";
 import {Pagination} from "../../components/ui/Pagination";
 import WordCard from "../../components/WordCard";
 import Loading from "../../components/ui/Loading";
 import WordNav from "./WordNav";
+import {queryClient} from "../../api";
 
 export default function Word() {
 
@@ -14,13 +15,25 @@ export default function Word() {
 
     const [speakType, setSpeakType] = useState("us")
     const [languageType, setLanguageType] = useState("zh")
+    const [masteredType, setMasteredType] = useState(undefined)
 
     const {
         data: pageWords,
         isLoading,
     } = useQuery({
-        queryKey: ['followWord', {page, text: searchText}],
-        queryFn: ({signal}) => searchFollowedWords({page, text: searchText, signal})
+        queryKey: ['followWord', {page, text: searchText, is_mastered: masteredType}],
+        queryFn: ({signal}) => searchFollowedWords({page, text: searchText, is_mastered: masteredType, signal})
+    })
+
+    const {
+        mutate: changeMasteredMutate,
+    } = useMutation({
+        mutationFn: changeMasteredWord,
+        onMutate: ({wordID, isMastered}) => {
+            const prev = queryClient.getQueryData(['followWord', {page, text: searchText, is_mastered: masteredType}])
+            prev.followed_words.find(item => item.word_id === wordID).mastered = isMastered
+            queryClient.setQueryData(['followWord', {page, text: searchText}], prev)
+        }
     })
 
     useEffect(() => {
@@ -35,6 +48,10 @@ export default function Word() {
         setSearchText(text)
     }
 
+    const onMasteredChange = (wordID, mastered) => {
+        changeMasteredMutate({wordID, isMastered: mastered})
+    }
+
     let content = ""
     if (isLoading) {
         content = <Loading/>
@@ -44,8 +61,11 @@ export default function Word() {
                 pageWords.followed_words.map((item) => {
                     return <WordCard key={item.word_id}
                                      word={item.word}
+                                     mastered={item.mastered}
                                      speakType={speakType}
                                      languageType={languageType}
+                                     isShowController={true}
+                                     onMasteredChange={onMasteredChange}
                     />
                 })
             }
@@ -60,6 +80,9 @@ export default function Word() {
             }}
             onLanguageTypeChange={(v) => {
                 setLanguageType(v)
+            }}
+            onMasteredTypeChange={(v) => {
+                setMasteredType(v)
             }}
         ></WordNav>
 

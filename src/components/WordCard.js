@@ -1,6 +1,15 @@
-import {Card, CardBody, Typography} from "@material-tailwind/react";
+import {Card, CardBody, CardFooter, IconButton, Tooltip, Typography} from "@material-tailwind/react";
+import {CheckIcon} from "@heroicons/react/24/solid";
 
-export default function WordCard({className, word, speakType, languageType}) {
+export default function WordCard({
+                                     className,
+                                     word,
+                                     speakType,
+                                     languageType,
+                                     mastered = false,
+                                     isShowController = false,
+                                     onMasteredChange
+                                 }) {
 
     const speakHandler = () => {
         let audio = ""
@@ -53,10 +62,19 @@ export default function WordCard({className, word, speakType, languageType}) {
                     })
                 }
             </div>
-
-            <div className="">
-
-            </div>
         </CardBody>
+        {
+            isShowController && <CardFooter className="flex justify-end">
+                <Tooltip content="已掌握">
+                    <IconButton variant="outlined"
+                                className="rounded-full"
+                                color={mastered ? "green" : "gray"}
+                                onClick={() => onMasteredChange(word.id, !mastered)}
+                    >
+                        <CheckIcon className="h-5 w-5"/>
+                    </IconButton>
+                </Tooltip>
+            </CardFooter>
+        }
     </Card>
 }

@@ -37,6 +37,8 @@ export default function ReviewSetting() {
         isLoading: isLoadingLastReview,
     } = useQuery({
         queryKey: ['review', 'last'],
+        cacheTime: 5000,
+        staleTime: 5000,
         queryFn: ({signal}) => getLastReview({signal})
     })
 
