@@ -33,6 +33,7 @@ export default function Word() {
             const prev = queryClient.getQueryData(['followWord', {page, text: searchText, is_mastered: masteredType}])
             prev.followed_words.find(item => item.word_id === wordID).mastered = isMastered
             queryClient.setQueryData(['followWord', {page, text: searchText}], prev)
+            queryClient.invalidateQueries({queryKey: ['followWord']})
         }
     })
 
