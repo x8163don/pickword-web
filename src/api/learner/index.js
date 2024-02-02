@@ -40,3 +40,37 @@ export const changeMasteredWord = async ({wordID, isMastered, signal}) => {
     })
     return response.json()
 }
+
+export const getLearnerSetting = async ({signal}) => {
+    const token = getAuthToken();
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}learner:setting`, {
+        method: 'GET',
+        headers: {Authorization: token},
+        signal
+    })
+    return response.json()
+}
+
+export const changeCurLevel = async ({level, signal}) => {
+    const token = getAuthToken();
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}learner:cur_level`, {
+        method: 'POST',
+        headers: {Authorization: token, 'Content-Type': 'application/json'},
+        body: JSON.stringify({level}),
+        signal
+    })
+
+    return response.json()
+}
+
+export const changeFollowType = async ({followType, signal}) => {
+    const token = getAuthToken();
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}learner:follow_type`, {
+        method: 'POST',
+        headers: {Authorization: token, 'Content-Type': 'application/json'},
+        body: JSON.stringify({follow_type: followType}),
+        signal
+    })
+
+    return response.json()
+}
